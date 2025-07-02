@@ -16,9 +16,13 @@ interface TransactionListProps {
   transactions: Transaction[];
   isLoading: boolean;
   onSelectTransaction: (transaction: Transaction) => void; // <-- Add this prop
+  searchTerm: string;
+  setSearchTerm: (term: string) => void;
+  sortOrder: string;
+  setSortOrder: (order: string) => void;
 }
 
-const TransactionList = ({ transactions, isLoading, onSelectTransaction }: TransactionListProps) => {
+const TransactionList = ({ transactions, isLoading, onSelectTransaction, searchTerm, setSearchTerm, sortOrder, setSortOrder }: TransactionListProps) => {
   if (isLoading) {
     return (
       <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
@@ -29,7 +33,28 @@ const TransactionList = ({ transactions, isLoading, onSelectTransaction }: Trans
 
   return (
     <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-      <h2 className="text-xl font-semibold text-gray-800 mb-4">Recent Transactions</h2>
+      <div className="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
+        <h2 className="text-xl font-semibold text-gray-800">Recent Transactions</h2>
+        <div className="flex items-center gap-4 w-full sm:w-auto">
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="border border-gray-300 rounded-md py-1 px-2 text-sm w-full"
+          />
+          <select
+            value={sortOrder}
+            onChange={(e) => setSortOrder(e.target.value)}
+            className="border border-gray-300 rounded-md py-1 px-2 text-sm"
+          >
+            <option value="date-desc">Date (Newest)</option>
+            <option value="date-asc">Date (Oldest)</option>
+            <option value="amount-desc">Amount (High-Low)</option>
+            <option value="amount-asc">Amount (Low-High)</option>
+          </select>
+        </div>
+      </div>
       <div className="divide-y divide-gray-200 max-h-96 overflow-y-auto">
         {transactions.length === 0 ? (
           <p className="text-gray-500 text-center py-4">No transactions found for this period.</p>

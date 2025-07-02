@@ -40,19 +40,34 @@ const TransactionForm = ({ onSubmit, initialData, buttonText, isSubmitting }: Tr
     setCategory(newType === 'income' ? incomeCategories[0] : expenseCategories[0]);
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!title || !amount) {
       alert('Please fill in the title and amount.');
       return;
     }
-    onSubmit({
-      type,
-      title,
-      amount: parseFloat(amount),
-      category,
-      date,
-    });
+
+    try {
+      await onSubmit({
+        type,
+        title,
+        amount: parseFloat(amount),
+        category,
+        date,
+      });
+
+      // On success, reset the form fields (if it's not an edit form)
+      if (!initialData) {
+        setTitle('');
+        setAmount('');
+        setCategory(incomeCategories[0]);
+        setDate(new Date().toISOString().substring(0, 10));
+        setType('income');
+      }
+    } catch (error) {
+      // Error is handled by the parent component, so we just log it here if needed
+      console.error("Form submission failed", error);
+    }
   };
 
   return (

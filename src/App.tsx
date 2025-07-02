@@ -19,6 +19,8 @@ function App() {
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const [selectedTransaction, setSelectedTransaction] = useState<Transaction | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [sortOrder, setSortOrder] = useState('date-desc');
 
   useEffect(() => {
     if (!currentUser) {
@@ -50,11 +52,38 @@ function App() {
   }, [currentUser]);
 
   const filteredTransactions = useMemo(() => {
-    return transactions.filter(t => {
+    let filtered = transactions.filter(t => {
       const transactionDate = new Date(t.date);
       return transactionDate.getMonth() === currentMonth && transactionDate.getFullYear() === currentYear;
     });
-  }, [transactions, currentMonth, currentYear]);
+
+    // Apply search filter
+    if (searchTerm) {
+      filtered = filtered.filter(t => 
+        t.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        t.category.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    // Apply sorting
+    switch (sortOrder) {
+      case 'date-asc':
+        filtered.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+        break;
+      case 'amount-desc':
+        filtered.sort((a, b) => b.amount - a.amount);
+        break;
+      case 'amount-asc':
+        filtered.sort((a, b) => a.amount - b.amount);
+        break;
+      case 'date-desc':
+      default:
+        filtered.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        break;
+    }
+
+    return filtered;
+  }, [transactions, currentMonth, currentYear, searchTerm, sortOrder]);
 
   const { totalIncome, totalExpenses, balance } = useMemo(() => {
     const income = filteredTransactions
@@ -121,6 +150,10 @@ function App() {
                 transactions={filteredTransactions}
                 isLoading={isLoading}
                 onSelectTransaction={setSelectedTransaction}
+                searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
+                sortOrder={sortOrder}
+                setSortOrder={setSortOrder}
               />
             </div>
             <div className="space-y-6">
