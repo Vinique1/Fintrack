@@ -4,6 +4,8 @@ import { useMemo } from 'react';
 import { type Transaction } from './TransactionList';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import EmptyState from './EmptyState'; // Import the new component
+import { FaChartPie } from 'react-icons/fa'; // Import a relevant icon
 
 // Register the necessary components for Chart.js
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
@@ -134,7 +136,10 @@ const Analytics = ({ transactions }: AnalyticsProps) => {
               );
             })
           ) : (
-            <p className="text-gray-500 text-center py-4">No expense data available</p>
+            <EmptyState 
+              icon={FaChartPie} 
+              message="No expense data available." 
+            />
           )}
         </div>
       </div>

@@ -40,8 +40,11 @@ The content is organized as follows:
 </file_summary>
 
 <directory_structure>
+.firebase/hosting.ZGlzdA.cache
+.firebaserc
 .gitignore
 eslint.config.js
+firebase.json
 index.html
 migrate.cjs
 package.json
@@ -53,7 +56,9 @@ src/assets/react.svg
 src/components/AddTransaction.tsx
 src/components/Analytics.tsx
 src/components/Card.tsx
+src/components/EmptyState.tsx
 src/components/Header.tsx
+src/components/PasswordStrengthMeter.tsx
 src/components/ProtectedRoute.tsx
 src/components/SummaryCards.tsx
 src/components/TransactionForm.tsx
@@ -64,6 +69,7 @@ src/index.css
 src/main.tsx
 src/pages/LoginPage.tsx
 src/pages/ProfilePage.tsx
+src/pages/ReportsPage.tsx
 src/pages/SignUpPage.tsx
 src/services/firebase.ts
 src/vite-env.d.ts
@@ -76,6 +82,186 @@ vite.config.ts
 
 <files>
 This section contains the contents of the repository's files.
+
+<file path=".firebase/hosting.ZGlzdA.cache">
+index.html,1751489289183,438a31145453151bba6a3ba551c83016cf51063f875d23bef255c18ba5bacd4b
+vite.svg,1751365810968,699a02e0e68a579f687d364bbbe7633161244f35af068220aee37b1b33dfb3c7
+assets/index-CuKiVop1.css,1751489289158,a6474c54282afb2a4e1d8748f5a7bf3c2b724cf9b448de84ea681d1a308ffee7
+assets/index-DMVOLGdp.js,1751489289184,980415e2e9ef9eb4b74ea2adbf700a047caad56e696ea57a0bd19ecdace746b7
+</file>
+
+<file path=".firebaserc">
+{
+  "projects": {
+    "default": "fintrack-app-f9321"
+  }
+}
+</file>
+
+<file path="firebase.json">
+{
+  "hosting": {
+    "public": "dist",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
+</file>
+
+<file path="src/components/EmptyState.tsx">
+// src/components/EmptyState.tsx
+
+import { type IconType } from 'react-icons';
+
+interface EmptyStateProps {
+  icon: IconType;
+  message: string;
+}
+
+const EmptyState = ({ icon: Icon, message }: EmptyStateProps) => {
+  return (
+    <div className="text-center py-10">
+      <Icon className="mx-auto text-5xl text-gray-300" />
+      <p className="mt-4 text-sm text-gray-500">{message}</p>
+    </div>
+  );
+};
+
+export default EmptyState;
+</file>
+
+<file path="src/components/PasswordStrengthMeter.tsx">
+// src/components/PasswordStrengthMeter.tsx
+
+interface PasswordStrengthMeterProps {
+  strength: number; // A score from 0 (worst) to 4 (best)
+}
+
+const PasswordStrengthMeter = ({ strength }: PasswordStrengthMeterProps) => {
+  const strengthLabels = ["Weak", "Fair", "Good", "Strong", "Very Strong"];
+  const color = ["bg-red-500", "bg-orange-500", "bg-yellow-500", "bg-lime-500", "bg-green-500"][strength];
+
+  return (
+    <div>
+      <div className="flex gap-2 mt-2">
+        {Array.from({ length: 5 }).map((_, index) => (
+          <div key={index} className="h-2 flex-1 rounded-full">
+            <div
+              className={`h-full rounded-full transition-all duration-300 ${index <= strength ? color : 'bg-gray-200'}`}
+            ></div>
+          </div>
+        ))}
+      </div>
+      <p className="text-right text-sm mt-1 font-medium" style={{ color: color?.replace('bg-', 'text-') }}>
+        {strengthLabels[strength]}
+      </p>
+    </div>
+  );
+};
+
+export default PasswordStrengthMeter;
+</file>
+
+<file path="src/pages/ReportsPage.tsx">
+// src/pages/ReportsPage.tsx
+
+import { useState, useEffect } from 'react';
+import { useAuth } from '../context/AuthContext';
+import { db } from '../services/firebase';
+import { collection, query, where, getDocs, orderBy } from 'firebase/firestore';
+import { type Transaction } from '../components/TransactionList';
+import { Link } from 'react-router-dom';
+
+const ReportsPage = () => {
+  const { currentUser } = useAuth();
+  // Set default dates for the last 30 days
+  const thirtyDaysAgo = new Date(new Date().setDate(new Date().getDate() - 30));
+  const [startDate, setStartDate] = useState(thirtyDaysAgo.toISOString().substring(0, 10));
+  const [endDate, setEndDate] = useState(new Date().toISOString().substring(0, 10));
+
+  const [reportData, setReportData] = useState<Transaction[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchReportData = async () => {
+      if (!currentUser) return;
+
+      setIsLoading(true);
+      try {
+        const q = query(
+          collection(db, 'transactions'),
+          where('userId', '==', currentUser.uid),
+          where('date', '>=', startDate),
+          where('date', '<=', endDate),
+          orderBy('date', 'desc')
+        );
+        
+        const querySnapshot = await getDocs(q);
+        const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Transaction));
+        setReportData(data);
+
+      } catch (error) {
+        console.error("Error fetching report data: ", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchReportData();
+  }, [currentUser, startDate, endDate]);
+
+  return (
+    <div className="bg-gray-50 min-h-screen">
+      <div className="container mx-auto p-4 md:p-8">
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-3xl font-bold text-gray-800">Reports</h1>
+          <Link to="/" className="font-medium text-indigo-600 hover:text-indigo-500">
+            &larr; Back to Dashboard
+          </Link>
+        </div>
+        
+        {/* Date Range Filter */}
+        <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex items-center gap-4 mb-8">
+          <div>
+            <label htmlFor="startDate" className="block text-sm font-medium text-gray-700">From</label>
+            <input type="date" id="startDate" value={startDate} onChange={e => setStartDate(e.target.value)} className="mt-1"/>
+          </div>
+          <div>
+            <label htmlFor="endDate" className="block text-sm font-medium text-gray-700">To</label>
+            <input type="date" id="endDate" value={endDate} onChange={e => setEndDate(e.target.value)} className="mt-1"/>
+          </div>
+        </div>
+
+        {/* Reports Content Area */}
+        {isLoading ? (
+          <p>Loading report...</p>
+        ) : (
+          <div className="space-y-8">
+            {/* We will add report widgets here */}
+            <div className="bg-white p-6 rounded-xl shadow-sm">
+              <h2 className="text-xl font-semibold">Report Summary</h2>
+              <p className="mt-2 text-gray-600">
+                Found <strong>{reportData.length}</strong> transactions for the selected period.
+              </p>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default ReportsPage;
+</file>
 
 <file path=".gitignore">
 # Logs
@@ -220,12 +406,14 @@ migrateData();
     "preview": "vite preview"
   },
   "dependencies": {
+    "@zxcvbn-ts/core": "^3.0.4",
     "chart.js": "^4.5.0",
     "firebase": "^11.10.0",
     "firebase-admin": "^13.4.0",
     "react": "^19.1.0",
     "react-chartjs-2": "^5.3.0",
     "react-dom": "^19.1.0",
+    "react-hot-toast": "^2.5.2",
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.6.3"
   },
@@ -369,186 +557,6 @@ export default tseslint.config([
 }
 </file>
 
-<file path="src/App.tsx">
-// src/App.tsx
-
-import { useState, useEffect, useMemo } from 'react';
-import Header from './components/Header';
-import SummaryCards from './components/SummaryCards';
-import AddTransaction from './components/AddTransaction';
-import TransactionList, { type Transaction } from './components/TransactionList';
-import Analytics from './components/Analytics';
-import TransactionModal from './components/TransactionModal';
-import { useAuth } from './context/AuthContext';
-import { db } from './services/firebase';
-import { collection, query, onSnapshot, orderBy, where, doc, deleteDoc, updateDoc } from 'firebase/firestore';
-
-function App() {
-  const { currentUser } = useAuth();
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
-  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
-  const [selectedTransaction, setSelectedTransaction] = useState<Transaction | null>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [sortOrder, setSortOrder] = useState('date-desc');
-
-  useEffect(() => {
-    if (!currentUser) {
-      setTransactions([]);
-      setIsLoading(false);
-      return;
-    }
-
-    setIsLoading(true);
-    const q = query(
-      collection(db, 'transactions'),
-      where('userId', '==', currentUser.uid),
-      orderBy('date', 'desc')
-    );
-
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      const transactionsData: Transaction[] = [];
-      querySnapshot.forEach((doc) => {
-        transactionsData.push({ id: doc.id, ...doc.data() } as Transaction);
-      });
-      setTransactions(transactionsData);
-      setIsLoading(false);
-    }, (error) => {
-      console.error("Snapshot error: ", error);
-      setIsLoading(false);
-    });
-
-    return () => unsubscribe();
-  }, [currentUser]);
-
-  const filteredTransactions = useMemo(() => {
-    let filtered = transactions.filter(t => {
-      const transactionDate = new Date(t.date);
-      return transactionDate.getMonth() === currentMonth && transactionDate.getFullYear() === currentYear;
-    });
-
-    // Apply search filter
-    if (searchTerm) {
-      filtered = filtered.filter(t => 
-        t.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        t.category.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    }
-
-    // Apply sorting
-    switch (sortOrder) {
-      case 'date-asc':
-        filtered.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-        break;
-      case 'amount-desc':
-        filtered.sort((a, b) => b.amount - a.amount);
-        break;
-      case 'amount-asc':
-        filtered.sort((a, b) => a.amount - b.amount);
-        break;
-      case 'date-desc':
-      default:
-        filtered.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-        break;
-    }
-
-    return filtered;
-  }, [transactions, currentMonth, currentYear, searchTerm, sortOrder]);
-
-  const { totalIncome, totalExpenses, balance } = useMemo(() => {
-    const income = filteredTransactions
-      .filter(t => t.type === 'income')
-      .reduce((sum, t) => sum + t.amount, 0);
-    const expenses = filteredTransactions
-      .filter(t => t.type === 'expense')
-      .reduce((sum, t) => sum + t.amount, 0);
-    return { totalIncome: income, totalExpenses: expenses, balance: income - expenses };
-  }, [filteredTransactions]);
-
-  const handleUpdate = async (transactionId: string, data: Omit<Transaction, 'id' | 'userId'>) => {
-    if (!currentUser) return;
-    setIsSubmitting(true);
-    try {
-      const docRef = doc(db, 'transactions', transactionId);
-      await updateDoc(docRef, data);
-      setSelectedTransaction(null);
-    } catch (error) {
-      console.error("Error updating transaction: ", error);
-      alert("Failed to update transaction.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const handleDelete = async (transactionId: string) => {
-    if (!currentUser) return;
-    const isConfirmed = window.confirm('Are you sure you want to delete this transaction?');
-    if (!isConfirmed) return;
-
-    setIsSubmitting(true);
-    try {
-      const docRef = doc(db, 'transactions', transactionId);
-      await deleteDoc(docRef);
-      setSelectedTransaction(null);
-    } catch (error) {
-      console.error("Error deleting transaction: ", error);
-      alert("Failed to delete transaction.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  return (
-    <div className="bg-gray-50 min-h-screen">
-      <div className="container mx-auto p-4 md:p-8">
-        <Header
-          currentMonth={currentMonth}
-          currentYear={currentYear}
-          onMonthChange={setCurrentMonth}
-          onYearChange={setCurrentYear}
-        />
-        <main className="mt-8">
-          <SummaryCards
-            totalIncome={totalIncome}
-            totalExpenses={totalExpenses}
-            balance={balance}
-          />
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
-            <div className="lg:col-span-2 space-y-6">
-              <AddTransaction />
-              <TransactionList
-                transactions={filteredTransactions}
-                isLoading={isLoading}
-                onSelectTransaction={setSelectedTransaction}
-                searchTerm={searchTerm}
-                setSearchTerm={setSearchTerm}
-                sortOrder={sortOrder}
-                setSortOrder={setSortOrder}
-              />
-            </div>
-            <div className="space-y-6">
-              <Analytics transactions={filteredTransactions} />
-            </div>
-          </div>
-        </main>
-      </div>
-
-      <TransactionModal
-        transaction={selectedTransaction}
-        onClose={() => setSelectedTransaction(null)}
-        onDelete={handleDelete}
-        onUpdate={handleUpdate}
-        isSubmitting={isSubmitting}
-      />
-    </div>
-  );
-}
-
-export default App;
-</file>
-
 <file path="src/assets/react.svg">
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--logos" width="35.93" height="32" preserveAspectRatio="xMidYMid meet" viewBox="0 0 256 228"><path fill="#00D8FF" d="M210.483 73.824a171.49 171.49 0 0 0-8.24-2.597c.465-1.9.893-3.777 1.273-5.621c6.238-30.281 2.16-54.676-11.769-62.708c-13.355-7.7-35.196.329-57.254 19.526a171.23 171.23 0 0 0-6.375 5.848a155.866 155.866 0 0 0-4.241-3.917C100.759 3.829 77.587-4.822 63.673 3.233C50.33 10.957 46.379 33.89 51.995 62.588a170.974 170.974 0 0 0 1.892 8.48c-3.28.932-6.445 1.924-9.474 2.98C17.309 83.498 0 98.307 0 113.668c0 15.865 18.582 31.778 46.812 41.427a145.52 145.52 0 0 0 6.921 2.165a167.467 167.467 0 0 0-2.01 9.138c-5.354 28.2-1.173 50.591 12.134 58.266c13.744 7.926 36.812-.22 59.273-19.855a145.567 145.567 0 0 0 5.342-4.923a168.064 168.064 0 0 0 6.92 6.314c21.758 18.722 43.246 26.282 56.54 18.586c13.731-7.949 18.194-32.003 12.4-61.268a145.016 145.016 0 0 0-1.535-6.842c1.62-.48 3.21-.974 4.76-1.488c29.348-9.723 48.443-25.443 48.443-41.52c0-15.417-17.868-30.326-45.517-39.844Zm-6.365 70.984c-1.4.463-2.836.91-4.3 1.345c-3.24-10.257-7.612-21.163-12.963-32.432c5.106-11 9.31-21.767 12.459-31.957c2.619.758 5.16 1.557 7.61 2.4c23.69 8.156 38.14 20.213 38.14 29.504c0 9.896-15.606 22.743-40.946 31.14Zm-10.514 20.834c2.562 12.94 2.927 24.64 1.23 33.787c-1.524 8.219-4.59 13.698-8.382 15.893c-8.067 4.67-25.32-1.4-43.927-17.412a156.726 156.726 0 0 1-6.437-5.87c7.214-7.889 14.423-17.06 21.459-27.246c12.376-1.098 24.068-2.894 34.671-5.345a134.17 134.17 0 0 1 1.386 6.193ZM87.276 214.515c-7.882 2.783-14.16 2.863-17.955.675c-8.075-4.657-11.432-22.636-6.853-46.752a156.923 156.923 0 0 1 1.869-8.499c10.486 2.32 22.093 3.988 34.498 4.994c7.084 9.967 14.501 19.128 21.976 27.15a134.668 134.668 0 0 1-4.877 4.492c-9.933 8.682-19.886 14.842-28.658 17.94ZM50.35 144.747c-12.483-4.267-22.792-9.812-29.858-15.863c-6.35-5.437-9.555-10.836-9.555-15.216c0-9.322 13.897-21.212 37.076-29.293c2.813-.98 5.757-1.905 8.812-2.773c3.204 10.42 7.406 21.315 12.477 32.332c-5.137 11.18-9.399 22.249-12.634 32.792a134.718 134.718 0 0 1-6.318-1.979Zm12.378-84.26c-4.811-24.587-1.616-43.134 6.425-47.789c8.564-4.958 27.502 2.111 47.463 19.835a144.318 144.318 0 0 1 3.841 3.545c-7.438 7.987-14.787 17.08-21.808 26.988c-12.04 1.116-23.565 2.908-34.161 5.309a160.342 160.342 0 0 1-1.76-7.887Zm110.427 27.268a347.8 347.8 0 0 0-7.785-12.803c8.168 1.033 15.994 2.404 23.343 4.08c-2.206 7.072-4.956 14.465-8.193 22.045a381.151 381.151 0 0 0-7.365-13.322Zm-45.032-43.861c5.044 5.465 10.096 11.566 15.065 18.186a322.04 322.04 0 0 0-30.257-.006c4.974-6.559 10.069-12.652 15.192-18.18ZM82.802 87.83a323.167 323.167 0 0 0-7.227 13.238c-3.184-7.553-5.909-14.98-8.134-22.152c7.304-1.634 15.093-2.97 23.209-3.984a321.524 321.524 0 0 0-7.848 12.897Zm8.081 65.352c-8.385-.936-16.291-2.203-23.593-3.793c2.26-7.3 5.045-14.885 8.298-22.6a321.187 321.187 0 0 0 7.257 13.246c2.594 4.48 5.28 8.868 8.038 13.147Zm37.542 31.03c-5.184-5.592-10.354-11.779-15.403-18.433c4.902.192 9.899.29 14.978.29c5.218 0 10.376-.117 15.453-.343c-4.985 6.774-10.018 12.97-15.028 18.486Zm52.198-57.817c3.422 7.8 6.306 15.345 8.596 22.52c-7.422 1.694-15.436 3.058-23.88 4.071a382.417 382.417 0 0 0 7.859-13.026a347.403 347.403 0 0 0 7.425-13.565Zm-16.898 8.101a358.557 358.557 0 0 1-12.281 19.815a329.4 329.4 0 0 1-23.444.823c-7.967 0-15.716-.248-23.178-.732a310.202 310.202 0 0 1-12.513-19.846h.001a307.41 307.41 0 0 1-10.923-20.627a310.278 310.278 0 0 1 10.89-20.637l-.001.001a307.318 307.318 0 0 1 12.413-19.761c7.613-.576 15.42-.876 23.31-.876H128c7.926 0 15.743.303 23.354.883a329.357 329.357 0 0 1 12.335 19.695a358.489 358.489 0 0 1 11.036 20.54a329.472 329.472 0 0 1-11 20.722Zm22.56-122.124c8.572 4.944 11.906 24.881 6.52 51.026c-.344 1.668-.73 3.367-1.15 5.09c-10.622-2.452-22.155-4.275-34.23-5.408c-7.034-10.017-14.323-19.124-21.64-27.008a160.789 160.789 0 0 1 5.888-5.4c18.9-16.447 36.564-22.941 44.612-18.3ZM128 90.808c12.625 0 22.86 10.235 22.86 22.86s-10.235 22.86-22.86 22.86s-22.86-10.235-22.86-22.86s10.235-22.86 22.86-22.86Z"></path></svg>
 </file>
@@ -560,6 +568,7 @@ import { useState } from 'react';
 import TransactionForm from './TransactionForm';
 import { db, auth } from '../services/firebase';
 import { collection, addDoc } from 'firebase/firestore';
+import { toast } from 'react-hot-toast'; // Import toast
 
 const AddTransaction = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -574,9 +583,11 @@ const AddTransaction = () => {
         ...data,
         userId: user.uid, // Add the user ID
       });
+      toast.success("Transaction added successfully!"); // Add success toast
+
     } catch (error) {
       console.error("Error adding document: ", error);
-      alert("Failed to add transaction.");
+      toast.error("Failed to add transaction."); // Replace alert
     } finally {
       setIsSubmitting(false);
     }
@@ -604,6 +615,8 @@ import { useMemo } from 'react';
 import { type Transaction } from './TransactionList';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import EmptyState from './EmptyState'; // Import the new component
+import { FaChartPie } from 'react-icons/fa'; // Import a relevant icon
 
 // Register the necessary components for Chart.js
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
@@ -734,7 +747,10 @@ const Analytics = ({ transactions }: AnalyticsProps) => {
               );
             })
           ) : (
-            <p className="text-gray-500 text-center py-4">No expense data available</p>
+            <EmptyState 
+              icon={FaChartPie} 
+              message="No expense data available." 
+            />
           )}
         </div>
       </div>
@@ -937,266 +953,6 @@ const SummaryCards = ({ totalIncome, totalExpenses, balance }: SummaryCardsProps
 export default SummaryCards;
 </file>
 
-<file path="src/components/TransactionForm.tsx">
-// src/components/TransactionForm.tsx
-
-import { useState, useEffect, type FormEvent } from 'react';
-import { type Transaction } from './TransactionList';
-
-const incomeCategories = [ 'Salary', 'Freelance', 'Investments', 'Gifts', 'Savings', 'Other Income' ];
-const expenseCategories = [ 'Housing', 'Food', 'Transportation', 'Utilities', 'Church', 'Healthcare', 'Entertainment', 'Shopping', 'Education', 'Personal Care', 'Debt Payments', 'Savings', 'Gifts', 'Other Expenses' ];
-
-type TransactionData = Omit<Transaction, 'id' | 'userId'>;
-
-interface TransactionFormProps {
-  onSubmit: (data: TransactionData) => void;
-  initialData?: TransactionData | null;
-  buttonText: string;
-  isSubmitting: boolean;
-}
-
-const TransactionForm = ({ onSubmit, initialData, buttonText, isSubmitting }: TransactionFormProps) => {
-  const [type, setType] = useState<'income' | 'expense'>(initialData?.type || 'income');
-  const [title, setTitle] = useState('');
-  const [amount, setAmount] = useState('');
-  const [category, setCategory] = useState(incomeCategories[0]);
-  const [date, setDate] = useState(new Date().toISOString().substring(0, 10));
-  
-  useEffect(() => {
-    if (initialData) {
-      setType(initialData.type);
-      setTitle(initialData.title);
-      setAmount(String(initialData.amount));
-      setCategory(initialData.category);
-      setDate(initialData.date);
-    }
-  }, [initialData]);
-
-  const categories = type === 'income' ? incomeCategories : expenseCategories;
-
-  // The change is on this line:
-  const handleTypeChange = (newType: 'income' | 'expense') => {
-    setType(newType);
-    setCategory(newType === 'income' ? incomeCategories[0] : expenseCategories[0]);
-  };
-
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    if (!title || !amount) {
-      alert('Please fill in the title and amount.');
-      return;
-    }
-
-    try {
-      await onSubmit({
-        type,
-        title,
-        amount: parseFloat(amount),
-        category,
-        date,
-      });
-
-      // On success, reset the form fields (if it's not an edit form)
-      if (!initialData) {
-        setTitle('');
-        setAmount('');
-        setCategory(incomeCategories[0]);
-        setDate(new Date().toISOString().substring(0, 10));
-        setType('income');
-      }
-    } catch (error) {
-      // Error is handled by the parent component, so we just log it here if needed
-      console.error("Form submission failed", error);
-    }
-  };
-
-  return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div className="flex space-x-4">
-        <div className="flex items-center space-x-2">
-          <input
-            type="radio"
-            id={`type-income-${initialData ? 'edit' : 'add'}`}
-            name={`type-${initialData ? 'edit' : 'add'}`}
-            value="income"
-            className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300"
-            checked={type === 'income'}
-            onChange={() => handleTypeChange('income')}
-          />
-          <label htmlFor={`type-income-${initialData ? 'edit' : 'add'}`} className="text-sm font-medium text-gray-700">Income</label>
-        </div>
-        <div className="flex items-center space-x-2">
-          <input
-            type="radio"
-            id={`type-expense-${initialData ? 'edit' : 'add'}`}
-            name={`type-${initialData ? 'edit' : 'add'}`}
-            value="expense"
-            className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300"
-            checked={type === 'expense'}
-            onChange={() => handleTypeChange('expense')}
-          />
-          <label htmlFor={`type-expense-${initialData ? 'edit' : 'add'}`} className="text-sm font-medium text-gray-700">Expense</label>
-        </div>
-      </div>
-
-      <div>
-        <label htmlFor="title" className="block text-sm font-medium text-gray-700">Title</label>
-        <input
-          type="text"
-          id="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-          required
-          disabled={isSubmitting}
-        />
-      </div>
-      <div>
-        <label htmlFor="amount" className="block text-sm font-medium text-gray-700">Amount (₦)</label>
-        <input
-          type="number"
-          id="amount"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-          min="0"
-          step="0.01"
-          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-          required
-          disabled={isSubmitting}
-        />
-      </div>
-      <div>
-        <label htmlFor="category" className="block text-sm font-medium text-gray-700">Category</label>
-        <select
-          id="category"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-          disabled={isSubmitting}
-        >
-          {categories.map((cat) => (
-            <option key={cat} value={cat}>{cat}</option>
-          ))}
-        </select>
-      </div>
-      <div>
-        <label htmlFor="date" className="block text-sm font-medium text-gray-700">Date</label>
-        <input
-          type="date"
-          id="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-          disabled={isSubmitting}
-        />
-      </div>
-      <button
-        type="submit"
-        className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out disabled:bg-indigo-400"
-        disabled={isSubmitting}
-      >
-        {isSubmitting ? 'Saving...' : buttonText}
-      </button>
-    </form>
-  );
-};
-
-export default TransactionForm;
-</file>
-
-<file path="src/components/TransactionList.tsx">
-// src/components/TransactionList.tsx
-
-import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
-
-export interface Transaction {
-  id: string;
-  type: 'income' | 'expense';
-  title: string;
-  amount: number;
-  category: string;
-  date: string;
-  description?: string;
-}
-
-interface TransactionListProps {
-  transactions: Transaction[];
-  isLoading: boolean;
-  onSelectTransaction: (transaction: Transaction) => void; // <-- Add this prop
-  searchTerm: string;
-  setSearchTerm: (term: string) => void;
-  sortOrder: string;
-  setSortOrder: (order: string) => void;
-}
-
-const TransactionList = ({ transactions, isLoading, onSelectTransaction, searchTerm, setSearchTerm, sortOrder, setSortOrder }: TransactionListProps) => {
-  if (isLoading) {
-    return (
-      <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-        <p className="text-center text-gray-500">Loading transactions...</p>
-      </div>
-    );
-  }
-
-  return (
-    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-      <div className="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
-        <h2 className="text-xl font-semibold text-gray-800">Recent Transactions</h2>
-        <div className="flex items-center gap-4 w-full sm:w-auto">
-          <input
-            type="text"
-            placeholder="Search..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="border border-gray-300 rounded-md py-1 px-2 text-sm w-full"
-          />
-          <select
-            value={sortOrder}
-            onChange={(e) => setSortOrder(e.target.value)}
-            className="border border-gray-300 rounded-md py-1 px-2 text-sm"
-          >
-            <option value="date-desc">Date (Newest)</option>
-            <option value="date-asc">Date (Oldest)</option>
-            <option value="amount-desc">Amount (High-Low)</option>
-            <option value="amount-asc">Amount (Low-High)</option>
-          </select>
-        </div>
-      </div>
-      <div className="divide-y divide-gray-200 max-h-96 overflow-y-auto">
-        {transactions.length === 0 ? (
-          <p className="text-gray-500 text-center py-4">No transactions found for this period.</p>
-        ) : (
-          transactions.map((transaction) => (
-            <div key={transaction.id} className="py-4 px-2 hover:bg-gray-50" onClick={() => onSelectTransaction(transaction)}>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-3">
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center ${transaction.type === 'income' ? 'bg-green-100' : 'bg-red-100'}`}>
-                    {transaction.type === 'income' ? <FaArrowUp className="text-green-600" /> : <FaArrowDown className="text-red-600" />}
-                  </div>
-                  <div>
-                    <p className="font-medium text-gray-900">{transaction.title}</p>
-                    <p className="text-sm text-gray-500">
-                      {transaction.category} • {new Date(transaction.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
-                    </p>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <p className={`font-medium ${transaction.type === 'income' ? 'text-green-600' : 'text-red-600'}`}>
-                    {transaction.type === 'income' ? '+' : '-'}₦{transaction.amount.toFixed(2)}
-                  </p>
-                </div>
-              </div>
-            </div>
-          ))
-        )}
-      </div>
-    </div>
-  );
-};
-
-export default TransactionList;
-</file>
-
 <file path="src/components/TransactionModal.tsx">
 // src/components/TransactionModal.tsx
 
@@ -1209,7 +965,7 @@ type TransactionData = Omit<Transaction, 'id' | 'userId'>;
 interface TransactionModalProps {
   transaction: Transaction | null;
   onClose: () => void;
-  onDelete: (transactionId: string) => void;
+  onDelete: () => void; // It no longer needs the ID
   onUpdate: (transactionId: string, data: TransactionData) => void;
   isSubmitting: boolean;
 }
@@ -1290,7 +1046,7 @@ const TransactionModal = ({ transaction, onClose, onDelete, onUpdate, isSubmitti
               </button>
               <button
                 type="button"
-                onClick={() => onDelete(transaction.id)}
+                onClick={onDelete} // Now just calls the onDelete function directly
                 disabled={isSubmitting}
                 className="px-4 py-2 bg-red-600 text-white border border-transparent rounded-md hover:bg-red-700 disabled:bg-red-400"
               >
@@ -1508,81 +1264,127 @@ export default LoginPage;
 
 import { useState, type FormEvent } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { updatePassword } from 'firebase/auth';
+import { updatePassword, deleteUser } from 'firebase/auth';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
+import { db } from '../services/firebase';
+import { query, collection, where, getDocs, writeBatch } from 'firebase/firestore';
 
 const ProfilePage = () => {
   const { currentUser } = useAuth();
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handlePasswordUpdate = async (e: FormEvent) => {
     e.preventDefault();
+    if (!currentUser) return;
     if (newPassword !== confirmPassword) {
-      return setError("Passwords do not match.");
+      return toast.error("Passwords do not match.");
     }
-    if (!currentUser) {
-      return setError("No user is logged in.");
-    }
-
     setIsLoading(true);
-    setError('');
-    setSuccess('');
-
     try {
       await updatePassword(currentUser, newPassword);
-      setSuccess("Password updated successfully!");
+      toast.success("Password updated successfully!");
       setNewPassword('');
       setConfirmPassword('');
-    } catch (err: any) {
-      setError("Failed to update password. You may need to log out and log back in again before changing it.");
+    } catch (err) {
+      toast.error("Failed to update password. You may need to log out and log back in again.");
       console.error(err);
     } finally {
       setIsLoading(false);
     }
   };
 
+  const handleAccountDelete = async () => {
+    if (!currentUser) return;
+
+    const isConfirmed = window.confirm(
+      'Are you absolutely sure you want to delete your account? All of your transaction data will be permanently lost. This action cannot be undone.'
+    );
+
+    if (!isConfirmed) return;
+
+    setIsDeleting(true);
+    try {
+      // Delete data first
+      const transactionsQuery = query(collection(db, 'transactions'), where('userId', '==', currentUser.uid));
+      const querySnapshot = await getDocs(transactionsQuery);
+      const batch = writeBatch(db);
+      querySnapshot.forEach((doc) => {
+        batch.delete(doc.ref);
+      });
+      await batch.commit();
+      toast.success("All transaction data deleted.");
+
+      // Then delete the user
+      await deleteUser(currentUser);
+      toast.success("Account permanently deleted.");
+    } catch (error) {
+      toast.error("Failed to delete account. Please try again.");
+      console.error(error);
+      setIsDeleting(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-      <div className="max-w-md w-full bg-white p-8 rounded-xl shadow-md">
-        <h2 className="text-2xl font-bold text-center text-gray-800 mb-2">My Profile</h2>
-        <p className="text-center text-gray-600 mb-6">Welcome, {currentUser?.email}</p>
-        
-        {error && <p className="mb-4 text-center text-red-500 bg-red-100 p-3 rounded-md">{error}</p>}
-        {success && <p className="mb-4 text-center text-green-500 bg-green-100 p-3 rounded-md">{success}</p>}
+      <div className="max-w-md w-full bg-white p-8 rounded-xl shadow-md space-y-8">
+        <div>
+          <h2 className="text-2xl font-bold text-center text-gray-800 mb-2">My Profile</h2>
+          <p className="text-center text-gray-600 mb-6">Welcome, {currentUser?.email}</p>
+        </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handlePasswordUpdate} className="space-y-6">
           <h3 className="text-lg font-medium border-b pb-2">Change Password</h3>
           <div>
-            <label htmlFor="newPassword">New Password</label>
+            <label htmlFor="newPassword" className="block text-sm font-medium text-gray-700">New Password</label>
             <input
               type="password"
               id="newPassword"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
-              className="mt-1 block w-full"
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
               required minLength={6}
             />
           </div>
           <div>
-            <label htmlFor="confirmPassword">Confirm New Password</label>
+            <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">Confirm New Password</label>
             <input
               type="password"
               id="confirmPassword"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="mt-1 block w-full"
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
               required minLength={6}
             />
           </div>
-          <button type="submit" disabled={isLoading} className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md">
+          {/* This button is now updated */}
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 disabled:bg-indigo-400"
+          >
             {isLoading ? 'Updating...' : 'Update Password'}
           </button>
         </form>
-        <p className="mt-6 text-center">
+
+        <div className="border-t pt-6">
+          <h3 className="text-lg font-medium text-red-600">Danger Zone</h3>
+          <p className="text-sm text-gray-500 mt-1">
+            Deleting your account is a permanent action.
+          </p>
+          <button
+            onClick={handleAccountDelete}
+            disabled={isDeleting}
+            className="w-full mt-4 bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700 disabled:bg-red-400"
+          >
+            {isDeleting ? 'Deleting Account...' : 'Delete My Account'}
+          </button>
+        </div>
+
+        <p className="text-center">
           <Link to="/" className="font-medium text-indigo-600 hover:text-indigo-500">
             &larr; Back to Dashboard
           </Link>
@@ -1598,35 +1400,60 @@ export default ProfilePage;
 <file path="src/pages/SignUpPage.tsx">
 // src/pages/SignUpPage.tsx
 
-import { useState, type FormEvent } from 'react';
+import { useState, useEffect, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../services/firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { toast } from 'react-hot-toast';
+import { zxcvbn, zxcvbnOptions } from '@zxcvbn-ts/core'; // Corrected import
+import PasswordStrengthMeter from '../components/PasswordStrengthMeter';
+
+// Optional: You can add common words to zxcvbn to improve its evaluation
+zxcvbnOptions.setOptions({
+  dictionary: {
+    ...zxcvbnOptions.dictionary,
+    userInputs: ['fintrack', 'finance', 'tracker'],
+  },
+});
 
 const SignUpPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [strength, setStrength] = useState(0);
+  const [feedback, setFeedback] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (password) {
+      const result = zxcvbn(password);
+      setStrength(result.score);
+      // Show the first warning or suggestion, if available
+      setFeedback(result.feedback.warning || result.feedback.suggestions[0] || '');
+    } else {
+      setStrength(0);
+      setFeedback('');
+    }
+  }, [password]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    if (strength < 2) {
+      toast.error("Please choose a stronger password.");
+      return;
+    }
+    
     setIsLoading(true);
-    setError('');
 
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      // On success, redirect to the main dashboard
+      toast.success("Account created successfully!");
       navigate('/');
     } catch (err: any) {
-      // Handle common Firebase errors
       if (err.code === 'auth/email-already-in-use') {
-        setError('This email address is already in use.');
-      } else if (err.code === 'auth/weak-password') {
-        setError('Password should be at least 6 characters.');
+        toast.error('This email address is already in use.');
       } else {
-        setError('Failed to create an account. Please try again.');
+        toast.error('Failed to create an account. Please try again.');
         console.error(err);
       }
     } finally {
@@ -1638,9 +1465,6 @@ const SignUpPage = () => {
     <div className="min-h-screen bg-gray-50 flex items-center justify-center">
       <div className="max-w-md w-full bg-white p-8 rounded-xl shadow-md">
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Create Your FinTrack Account</h2>
-        
-        {error && <p className="mb-4 text-center text-red-500 bg-red-100 p-3 rounded-md">{error}</p>}
-
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email Address</label>
@@ -1662,13 +1486,14 @@ const SignUpPage = () => {
               onChange={(e) => setPassword(e.target.value)}
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
               required
-              minLength={6}
             />
+            <PasswordStrengthMeter strength={strength} />
+            {feedback && <p className="text-xs text-gray-500 mt-1">{feedback}</p>}
           </div>
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition disabled:bg-indigo-400"
+            className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 disabled:bg-indigo-400"
           >
             {isLoading ? 'Creating Account...' : 'Sign Up'}
           </button>
@@ -1828,6 +1653,474 @@ export default defineConfig({
     tailwindcss(), // <-- Add the plugin
   ],
 })
+</file>
+
+<file path="src/App.tsx">
+// src/App.tsx
+
+import { useState, useEffect, useMemo, useRef } from 'react';
+import { Toaster, toast } from 'react-hot-toast';
+import Header from './components/Header';
+import SummaryCards from './components/SummaryCards';
+import AddTransaction from './components/AddTransaction';
+import TransactionList, { type Transaction } from './components/TransactionList';
+import Analytics from './components/Analytics';
+import TransactionModal from './components/TransactionModal';
+import { useAuth } from './context/AuthContext';
+import { db } from './services/firebase';
+import { collection, query, onSnapshot, orderBy, where, doc, deleteDoc, updateDoc } from 'firebase/firestore';
+
+function App() {
+  const { currentUser } = useAuth();
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
+  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+  const [selectedTransaction, setSelectedTransaction] = useState<Transaction | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [sortOrder, setSortOrder] = useState('date-desc');
+  const pendingDeleteRef = useRef<{ transaction: Transaction, timeoutId: NodeJS.Timeout } | null>(null);
+
+  useEffect(() => {
+    if (!currentUser) {
+      setTransactions([]);
+      setIsLoading(false);
+      return;
+    }
+    setIsLoading(true);
+    const q = query(
+      collection(db, 'transactions'),
+      where('userId', '==', currentUser.uid),
+      orderBy('date', 'desc')
+    );
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Transaction));
+      setTransactions(data);
+      setIsLoading(false);
+    }, (error) => {
+      console.error("Snapshot error: ", error);
+      setIsLoading(false);
+    });
+    return () => unsubscribe();
+  }, [currentUser]);
+
+  const filteredTransactions = useMemo(() => {
+    let filtered = transactions.filter(t => {
+      const transactionDate = new Date(t.date);
+      return transactionDate.getMonth() === currentMonth && transactionDate.getFullYear() === currentYear;
+    });
+    if (searchTerm) {
+      filtered = filtered.filter(t =>
+        t.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        t.category.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+    switch (sortOrder) {
+      case 'date-asc': filtered.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()); break;
+      case 'amount-desc': filtered.sort((a, b) => b.amount - a.amount); break;
+      case 'amount-asc': filtered.sort((a, b) => a.amount - b.amount); break;
+      default: filtered.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()); break;
+    }
+    return filtered;
+  }, [transactions, currentMonth, currentYear, searchTerm, sortOrder]);
+
+  const { totalIncome, totalExpenses, balance } = useMemo(() => {
+    const income = filteredTransactions.filter(t => t.type === 'income').reduce((sum, t) => sum + t.amount, 0);
+    const expenses = filteredTransactions.filter(t => t.type === 'expense').reduce((sum, t) => sum + t.amount, 0);
+    return { totalIncome: income, totalExpenses: expenses, balance: income - expenses };
+  }, [filteredTransactions]);
+
+  const handleUpdate = async (transactionId: string, data: Omit<Transaction, 'id' | 'userId'>) => {
+    if (!currentUser) return;
+    setIsSubmitting(true);
+    try {
+      const docRef = doc(db, 'transactions', transactionId);
+      await updateDoc(docRef, data as any);
+      setSelectedTransaction(null);
+      toast.success("Transaction updated!");
+    } catch (error) {
+      console.error("Error updating transaction: ", error);
+      toast.error("Failed to update transaction.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const performActualDelete = async (transactionIdToDelete: string) => {
+    try {
+      await deleteDoc(doc(db, 'transactions', transactionIdToDelete));
+      toast.success("Transaction permanently deleted.");
+    } catch (error) {
+      console.error("Final delete failed: ", error);
+      toast.error("Could not permanently delete transaction.");
+    }
+  };
+
+  const handleDeleteRequest = (transactionToDelete: Transaction) => {
+    if (pendingDeleteRef.current?.timeoutId) {
+      clearTimeout(pendingDeleteRef.current.timeoutId);
+    }
+    setSelectedTransaction(null);
+    setTransactions(current => current.filter(t => t.id !== transactionToDelete.id));
+
+    toast(
+      (t) => (
+        <div className="flex items-center gap-4">
+          <span>Transaction deleted.</span>
+          <button
+            className="font-bold text-indigo-600 hover:text-indigo-800"
+            onClick={() => {
+              if (pendingDeleteRef.current?.timeoutId) {
+                clearTimeout(pendingDeleteRef.current.timeoutId);
+                pendingDeleteRef.current = null;
+              }
+              setTransactions(current => [transactionToDelete, ...current]);
+              toast.dismiss(t.id);
+            }}
+          >
+            Undo
+          </button>
+        </div>
+      ),
+      { duration: 5000 }
+    );
+    const timeoutId = setTimeout(() => {
+      performActualDelete(transactionToDelete.id);
+    }, 5000);
+    pendingDeleteRef.current = { transaction: transactionToDelete, timeoutId };
+  };
+
+  return (
+    <div className="bg-gray-50 min-h-screen">
+      <Toaster position="top-center" />
+      <div className="container mx-auto p-4 md:p-8">
+        <Header
+          currentMonth={currentMonth}
+          currentYear={currentYear}
+          onMonthChange={setCurrentMonth}
+          onYearChange={setCurrentYear}
+        />
+        <main className="mt-8">
+          <SummaryCards
+            totalIncome={totalIncome}
+            totalExpenses={totalExpenses}
+            balance={balance}
+          />
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
+            <div className="lg:col-span-2 space-y-6">
+              <AddTransaction />
+              <TransactionList
+                transactions={filteredTransactions}
+                isLoading={isLoading}
+                onSelectTransaction={setSelectedTransaction}
+                searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
+                sortOrder={sortOrder}
+                setSortOrder={setSortOrder}
+              />
+            </div>
+            <div className="space-y-6">
+              <Analytics transactions={filteredTransactions} />
+            </div>
+          </div>
+        </main>
+      </div>
+      <TransactionModal
+        transaction={selectedTransaction}
+        onClose={() => setSelectedTransaction(null)}
+        onDelete={() => selectedTransaction && handleDeleteRequest(selectedTransaction)}
+        onUpdate={handleUpdate}
+        isSubmitting={isSubmitting}
+      />
+    </div>
+  );
+}
+
+export default App;
+</file>
+
+<file path="src/components/TransactionForm.tsx">
+// src/components/TransactionForm.tsx
+
+import { useState, useEffect, type FormEvent } from 'react';
+import { type Transaction } from './TransactionList';
+
+const incomeCategories = [ 'Salary', 'Freelance', 'Investments', 'Gifts', 'Savings', 'Other Income' ];
+const expenseCategories = [ 'Housing', 'Food', 'Transportation', 'Utilities', 'Church', 'Healthcare', 'Entertainment', 'Shopping', 'Education', 'Personal Care', 'Debt Payments', 'Savings', 'Gifts', 'Other Expenses' ];
+
+type TransactionData = Omit<Transaction, 'id' | 'userId'>;
+
+interface TransactionFormProps {
+  onSubmit: (data: TransactionData) => void;
+  initialData?: TransactionData | null;
+  buttonText: string;
+  isSubmitting: boolean;
+}
+
+const TransactionForm = ({ onSubmit, initialData, buttonText, isSubmitting }: TransactionFormProps) => {
+  const [type, setType] = useState<'income' | 'expense'>(initialData?.type || 'income');
+  const [title, setTitle] = useState('');
+  const [amount, setAmount] = useState('');
+  const [category, setCategory] = useState(incomeCategories[0]);
+  const [date, setDate] = useState(new Date().toISOString().substring(0, 10));
+  const [description, setDescription] = useState(''); // 1. Add state for description
+  
+  useEffect(() => {
+    if (initialData) {
+      setType(initialData.type);
+      setTitle(initialData.title);
+      setAmount(String(initialData.amount));
+      setCategory(initialData.category);
+      setDate(initialData.date);
+      setDescription(initialData.description || ''); // 2. Set description from initial data
+    }
+  }, [initialData]);
+
+  const categories = type === 'income' ? incomeCategories : expenseCategories;
+
+  // The change is on this line:
+  const handleTypeChange = (newType: 'income' | 'expense') => {
+    setType(newType);
+    setCategory(newType === 'income' ? incomeCategories[0] : expenseCategories[0]);
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    if (!title || !amount) {
+      alert('Please fill in the title and amount.');
+      return;
+    }
+
+    try {
+      await onSubmit({
+        type,
+        title,
+        amount: parseFloat(amount),
+        category,
+        date,
+        description, // 3. Include description in submitted data
+
+      });
+
+      // On success, reset the form fields (if it's not an edit form)
+      if (!initialData) {
+        setTitle('');
+        setAmount('');
+        setCategory(incomeCategories[0]);
+        setDate(new Date().toISOString().substring(0, 10));
+        setType('income');
+        setDescription(''); // 4. Reset description field
+      }
+    } catch (error) {
+      // Error is handled by the parent component, so we just log it here if needed
+      console.error("Form submission failed", error);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <div className="flex space-x-4">
+        <div className="flex items-center space-x-2">
+          <input
+            type="radio"
+            id={`type-income-${initialData ? 'edit' : 'add'}`}
+            name={`type-${initialData ? 'edit' : 'add'}`}
+            value="income"
+            className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300"
+            checked={type === 'income'}
+            onChange={() => handleTypeChange('income')}
+          />
+          <label htmlFor={`type-income-${initialData ? 'edit' : 'add'}`} className="text-sm font-medium text-gray-700">Income</label>
+        </div>
+        <div className="flex items-center space-x-2">
+          <input
+            type="radio"
+            id={`type-expense-${initialData ? 'edit' : 'add'}`}
+            name={`type-${initialData ? 'edit' : 'add'}`}
+            value="expense"
+            className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300"
+            checked={type === 'expense'}
+            onChange={() => handleTypeChange('expense')}
+          />
+          <label htmlFor={`type-expense-${initialData ? 'edit' : 'add'}`} className="text-sm font-medium text-gray-700">Expense</label>
+        </div>
+      </div>
+
+      <div>
+        <label htmlFor="title" className="block text-sm font-medium text-gray-700">Title</label>
+        <input
+          type="text"
+          id="title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          required
+          disabled={isSubmitting}
+        />
+      </div>
+      <div>
+        <label htmlFor="amount" className="block text-sm font-medium text-gray-700">Amount (₦)</label>
+        <input
+          type="number"
+          id="amount"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+          min="0"
+          step="0.01"
+          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          required
+          disabled={isSubmitting}
+        />
+      </div>
+      <div>
+        <label htmlFor="category" className="block text-sm font-medium text-gray-700">Category</label>
+        <select
+          id="category"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          disabled={isSubmitting}
+        >
+          {categories.map((cat) => (
+            <option key={cat} value={cat}>{cat}</option>
+          ))}
+        </select>
+      </div>
+      <div>
+        <label htmlFor="date" className="block text-sm font-medium text-gray-700">Date</label>
+        <input
+          type="date"
+          id="date"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          disabled={isSubmitting}
+        />
+      </div>
+      <div>
+        <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+          Description (Optional)
+        </label>
+        <textarea
+          id="description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          rows={2}
+          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          disabled={isSubmitting}
+        ></textarea>
+      </div>
+      
+      <button
+        type="submit"
+        className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out disabled:bg-indigo-400"
+        disabled={isSubmitting}
+      >
+        {isSubmitting ? 'Saving...' : buttonText}
+      </button>
+    </form>
+  );
+};
+
+export default TransactionForm;
+</file>
+
+<file path="src/components/TransactionList.tsx">
+// src/components/TransactionList.tsx
+
+import { FaArrowUp, FaArrowDown, FaFileInvoiceDollar } from 'react-icons/fa'; // Add FaFileInvoiceDollar
+import EmptyState from './EmptyState'; // Import the new component
+
+export interface Transaction {
+  id: string;
+  type: 'income' | 'expense';
+  title: string;
+  amount: number;
+  category: string;
+  date: string;
+  description?: string;
+}
+
+interface TransactionListProps {
+  transactions: Transaction[];
+  isLoading: boolean;
+  onSelectTransaction: (transaction: Transaction) => void; // <-- Add this prop
+  searchTerm: string;
+  setSearchTerm: (term: string) => void;
+  sortOrder: string;
+  setSortOrder: (order: string) => void;
+}
+
+const TransactionList = ({ transactions, isLoading, onSelectTransaction, searchTerm, setSearchTerm, sortOrder, setSortOrder }: TransactionListProps) => {
+  if (isLoading) {
+    return (
+      <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+        <p className="text-center text-gray-500">Loading transactions...</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+      <div className="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
+        <h2 className="text-xl font-semibold text-gray-800">Recent Transactions</h2>
+        <div className="flex items-center gap-4 w-full sm:w-auto">
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="border border-gray-300 rounded-md py-1 px-2 text-sm w-full"
+          />
+          <select
+            value={sortOrder}
+            onChange={(e) => setSortOrder(e.target.value)}
+            className="border border-gray-300 rounded-md py-1 px-2 text-sm"
+          >
+            <option value="date-desc">Date (Newest)</option>
+            <option value="date-asc">Date (Oldest)</option>
+            <option value="amount-desc">Amount (High-Low)</option>
+            <option value="amount-asc">Amount (Low-High)</option>
+          </select>
+        </div>
+      </div>
+      <div className="divide-y divide-gray-200 max-h-96 overflow-y-auto">
+        {transactions.length === 0 ? (
+          <EmptyState 
+            icon={FaFileInvoiceDollar} 
+            message="No transactions found for this period." 
+          />
+        ) : (
+          transactions.map((transaction) => (
+            <div key={transaction.id} className="py-4 px-2 hover:bg-gray-50" onClick={() => onSelectTransaction(transaction)}>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center ${transaction.type === 'income' ? 'bg-green-100' : 'bg-red-100'}`}>
+                    {transaction.type === 'income' ? <FaArrowUp className="text-green-600" /> : <FaArrowDown className="text-red-600" />}
+                  </div>
+                  <div>
+                    <p className="font-medium text-gray-900">{transaction.title}</p>
+                    <p className="text-sm text-gray-500">
+                      {transaction.category} • {new Date(transaction.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                    </p>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <p className={`font-medium ${transaction.type === 'income' ? 'text-green-600' : 'text-red-600'}`}>
+                    {transaction.type === 'income' ? '+' : '-'}₦{transaction.amount.toFixed(2)}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default TransactionList;
 </file>
 
 </files>

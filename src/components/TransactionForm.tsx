@@ -21,6 +21,7 @@ const TransactionForm = ({ onSubmit, initialData, buttonText, isSubmitting }: Tr
   const [amount, setAmount] = useState('');
   const [category, setCategory] = useState(incomeCategories[0]);
   const [date, setDate] = useState(new Date().toISOString().substring(0, 10));
+  const [description, setDescription] = useState(''); // 1. Add state for description
   
   useEffect(() => {
     if (initialData) {
@@ -29,6 +30,7 @@ const TransactionForm = ({ onSubmit, initialData, buttonText, isSubmitting }: Tr
       setAmount(String(initialData.amount));
       setCategory(initialData.category);
       setDate(initialData.date);
+      setDescription(initialData.description || ''); // 2. Set description from initial data
     }
   }, [initialData]);
 
@@ -54,6 +56,8 @@ const TransactionForm = ({ onSubmit, initialData, buttonText, isSubmitting }: Tr
         amount: parseFloat(amount),
         category,
         date,
+        description, // 3. Include description in submitted data
+
       });
 
       // On success, reset the form fields (if it's not an edit form)
@@ -63,6 +67,7 @@ const TransactionForm = ({ onSubmit, initialData, buttonText, isSubmitting }: Tr
         setCategory(incomeCategories[0]);
         setDate(new Date().toISOString().substring(0, 10));
         setType('income');
+        setDescription(''); // 4. Reset description field
       }
     } catch (error) {
       // Error is handled by the parent component, so we just log it here if needed
@@ -150,6 +155,20 @@ const TransactionForm = ({ onSubmit, initialData, buttonText, isSubmitting }: Tr
           disabled={isSubmitting}
         />
       </div>
+      <div>
+        <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+          Description (Optional)
+        </label>
+        <textarea
+          id="description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          rows={2}
+          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          disabled={isSubmitting}
+        ></textarea>
+      </div>
+      
       <button
         type="submit"
         className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out disabled:bg-indigo-400"

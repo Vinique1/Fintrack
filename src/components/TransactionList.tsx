@@ -1,6 +1,7 @@
 // src/components/TransactionList.tsx
 
-import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
+import { FaArrowUp, FaArrowDown, FaFileInvoiceDollar } from 'react-icons/fa'; // Add FaFileInvoiceDollar
+import EmptyState from './EmptyState'; // Import the new component
 
 export interface Transaction {
   id: string;
@@ -57,7 +58,10 @@ const TransactionList = ({ transactions, isLoading, onSelectTransaction, searchT
       </div>
       <div className="divide-y divide-gray-200 max-h-96 overflow-y-auto">
         {transactions.length === 0 ? (
-          <p className="text-gray-500 text-center py-4">No transactions found for this period.</p>
+          <EmptyState 
+            icon={FaFileInvoiceDollar} 
+            message="No transactions found for this period." 
+          />
         ) : (
           transactions.map((transaction) => (
             <div key={transaction.id} className="py-4 px-2 hover:bg-gray-50" onClick={() => onSelectTransaction(transaction)}>

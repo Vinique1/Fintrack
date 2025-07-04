@@ -1,6 +1,7 @@
 // src/App.tsx
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
+import { Toaster, toast } from 'react-hot-toast';
 import Header from './components/Header';
 import SummaryCards from './components/SummaryCards';
 import AddTransaction from './components/AddTransaction';
@@ -21,6 +22,7 @@ function App() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortOrder, setSortOrder] = useState('date-desc');
+  const pendingDeleteRef = useRef<{ transaction: Transaction, timeoutId: NodeJS.Timeout } | null>(null);
 
   useEffect(() => {
     if (!currentUser) {
@@ -28,26 +30,20 @@ function App() {
       setIsLoading(false);
       return;
     }
-
     setIsLoading(true);
     const q = query(
       collection(db, 'transactions'),
       where('userId', '==', currentUser.uid),
       orderBy('date', 'desc')
     );
-
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      const transactionsData: Transaction[] = [];
-      querySnapshot.forEach((doc) => {
-        transactionsData.push({ id: doc.id, ...doc.data() } as Transaction);
-      });
-      setTransactions(transactionsData);
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Transaction));
+      setTransactions(data);
       setIsLoading(false);
     }, (error) => {
       console.error("Snapshot error: ", error);
       setIsLoading(false);
     });
-
     return () => unsubscribe();
   }, [currentUser]);
 
@@ -56,42 +52,24 @@ function App() {
       const transactionDate = new Date(t.date);
       return transactionDate.getMonth() === currentMonth && transactionDate.getFullYear() === currentYear;
     });
-
-    // Apply search filter
     if (searchTerm) {
-      filtered = filtered.filter(t => 
+      filtered = filtered.filter(t =>
         t.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         t.category.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
-
-    // Apply sorting
     switch (sortOrder) {
-      case 'date-asc':
-        filtered.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-        break;
-      case 'amount-desc':
-        filtered.sort((a, b) => b.amount - a.amount);
-        break;
-      case 'amount-asc':
-        filtered.sort((a, b) => a.amount - b.amount);
-        break;
-      case 'date-desc':
-      default:
-        filtered.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-        break;
+      case 'date-asc': filtered.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()); break;
+      case 'amount-desc': filtered.sort((a, b) => b.amount - a.amount); break;
+      case 'amount-asc': filtered.sort((a, b) => a.amount - b.amount); break;
+      default: filtered.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()); break;
     }
-
     return filtered;
   }, [transactions, currentMonth, currentYear, searchTerm, sortOrder]);
 
   const { totalIncome, totalExpenses, balance } = useMemo(() => {
-    const income = filteredTransactions
-      .filter(t => t.type === 'income')
-      .reduce((sum, t) => sum + t.amount, 0);
-    const expenses = filteredTransactions
-      .filter(t => t.type === 'expense')
-      .reduce((sum, t) => sum + t.amount, 0);
+    const income = filteredTransactions.filter(t => t.type === 'income').reduce((sum, t) => sum + t.amount, 0);
+    const expenses = filteredTransactions.filter(t => t.type === 'expense').reduce((sum, t) => sum + t.amount, 0);
     return { totalIncome: income, totalExpenses: expenses, balance: income - expenses };
   }, [filteredTransactions]);
 
@@ -100,36 +78,64 @@ function App() {
     setIsSubmitting(true);
     try {
       const docRef = doc(db, 'transactions', transactionId);
-      await updateDoc(docRef, data);
+      await updateDoc(docRef, data as any);
       setSelectedTransaction(null);
+      toast.success("Transaction updated!");
     } catch (error) {
       console.error("Error updating transaction: ", error);
-      alert("Failed to update transaction.");
+      toast.error("Failed to update transaction.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const handleDelete = async (transactionId: string) => {
-    if (!currentUser) return;
-    const isConfirmed = window.confirm('Are you sure you want to delete this transaction?');
-    if (!isConfirmed) return;
-
-    setIsSubmitting(true);
+  const performActualDelete = async (transactionIdToDelete: string) => {
     try {
-      const docRef = doc(db, 'transactions', transactionId);
-      await deleteDoc(docRef);
-      setSelectedTransaction(null);
+      await deleteDoc(doc(db, 'transactions', transactionIdToDelete));
+      toast.success("Transaction permanently deleted.");
     } catch (error) {
-      console.error("Error deleting transaction: ", error);
-      alert("Failed to delete transaction.");
-    } finally {
-      setIsSubmitting(false);
+      console.error("Final delete failed: ", error);
+      toast.error("Could not permanently delete transaction.");
     }
+  };
+
+  const handleDeleteRequest = (transactionToDelete: Transaction) => {
+    if (pendingDeleteRef.current?.timeoutId) {
+      clearTimeout(pendingDeleteRef.current.timeoutId);
+    }
+    setSelectedTransaction(null);
+    setTransactions(current => current.filter(t => t.id !== transactionToDelete.id));
+
+    toast(
+      (t) => (
+        <div className="flex items-center gap-4">
+          <span>Transaction deleted.</span>
+          <button
+            className="font-bold text-indigo-600 hover:text-indigo-800"
+            onClick={() => {
+              if (pendingDeleteRef.current?.timeoutId) {
+                clearTimeout(pendingDeleteRef.current.timeoutId);
+                pendingDeleteRef.current = null;
+              }
+              setTransactions(current => [transactionToDelete, ...current]);
+              toast.dismiss(t.id);
+            }}
+          >
+            Undo
+          </button>
+        </div>
+      ),
+      { duration: 5000 }
+    );
+    const timeoutId = setTimeout(() => {
+      performActualDelete(transactionToDelete.id);
+    }, 5000);
+    pendingDeleteRef.current = { transaction: transactionToDelete, timeoutId };
   };
 
   return (
     <div className="bg-gray-50 min-h-screen">
+      <Toaster position="top-center" />
       <div className="container mx-auto p-4 md:p-8">
         <Header
           currentMonth={currentMonth}
@@ -162,11 +168,10 @@ function App() {
           </div>
         </main>
       </div>
-
       <TransactionModal
         transaction={selectedTransaction}
         onClose={() => setSelectedTransaction(null)}
-        onDelete={handleDelete}
+        onDelete={() => selectedTransaction && handleDeleteRequest(selectedTransaction)}
         onUpdate={handleUpdate}
         isSubmitting={isSubmitting}
       />

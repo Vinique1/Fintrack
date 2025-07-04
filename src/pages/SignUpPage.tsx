@@ -1,34 +1,59 @@
 // src/pages/SignUpPage.tsx
 
-import { useState, type FormEvent } from 'react';
+import { useState, useEffect, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../services/firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { toast } from 'react-hot-toast';
+import { zxcvbn, zxcvbnOptions } from '@zxcvbn-ts/core'; // Corrected import
+import PasswordStrengthMeter from '../components/PasswordStrengthMeter';
+
+// Optional: You can add common words to zxcvbn to improve its evaluation
+zxcvbnOptions.setOptions({
+  dictionary: {
+    ...zxcvbnOptions.dictionary,
+    userInputs: ['fintrack', 'finance', 'tracker'],
+  },
+});
 
 const SignUpPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [strength, setStrength] = useState(0);
+  const [feedback, setFeedback] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (password) {
+      const result = zxcvbn(password);
+      setStrength(result.score);
+      // Show the first warning or suggestion, if available
+      setFeedback(result.feedback.warning || result.feedback.suggestions[0] || '');
+    } else {
+      setStrength(0);
+      setFeedback('');
+    }
+  }, [password]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    if (strength < 2) {
+      toast.error("Please choose a stronger password.");
+      return;
+    }
+    
     setIsLoading(true);
-    setError('');
 
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      // On success, redirect to the main dashboard
+      toast.success("Account created successfully!");
       navigate('/');
     } catch (err: any) {
-      // Handle common Firebase errors
       if (err.code === 'auth/email-already-in-use') {
-        setError('This email address is already in use.');
-      } else if (err.code === 'auth/weak-password') {
-        setError('Password should be at least 6 characters.');
+        toast.error('This email address is already in use.');
       } else {
-        setError('Failed to create an account. Please try again.');
+        toast.error('Failed to create an account. Please try again.');
         console.error(err);
       }
     } finally {
@@ -40,9 +65,6 @@ const SignUpPage = () => {
     <div className="min-h-screen bg-gray-50 flex items-center justify-center">
       <div className="max-w-md w-full bg-white p-8 rounded-xl shadow-md">
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Create Your FinTrack Account</h2>
-        
-        {error && <p className="mb-4 text-center text-red-500 bg-red-100 p-3 rounded-md">{error}</p>}
-
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email Address</label>
@@ -64,13 +86,14 @@ const SignUpPage = () => {
               onChange={(e) => setPassword(e.target.value)}
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
               required
-              minLength={6}
             />
+            <PasswordStrengthMeter strength={strength} />
+            {feedback && <p className="text-xs text-gray-500 mt-1">{feedback}</p>}
           </div>
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition disabled:bg-indigo-400"
+            className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 disabled:bg-indigo-400"
           >
             {isLoading ? 'Creating Account...' : 'Sign Up'}
           </button>

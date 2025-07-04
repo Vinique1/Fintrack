@@ -9,7 +9,7 @@ type TransactionData = Omit<Transaction, 'id' | 'userId'>;
 interface TransactionModalProps {
   transaction: Transaction | null;
   onClose: () => void;
-  onDelete: (transactionId: string) => void;
+  onDelete: () => void; // It no longer needs the ID
   onUpdate: (transactionId: string, data: TransactionData) => void;
   isSubmitting: boolean;
 }
@@ -90,7 +90,7 @@ const TransactionModal = ({ transaction, onClose, onDelete, onUpdate, isSubmitti
               </button>
               <button
                 type="button"
-                onClick={() => onDelete(transaction.id)}
+                onClick={onDelete} // Now just calls the onDelete function directly
                 disabled={isSubmitting}
                 className="px-4 py-2 bg-red-600 text-white border border-transparent rounded-md hover:bg-red-700 disabled:bg-red-400"
               >

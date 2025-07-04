@@ -4,6 +4,7 @@ import { useState } from 'react';
 import TransactionForm from './TransactionForm';
 import { db, auth } from '../services/firebase';
 import { collection, addDoc } from 'firebase/firestore';
+import { toast } from 'react-hot-toast'; // Import toast
 
 const AddTransaction = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -18,9 +19,11 @@ const AddTransaction = () => {
         ...data,
         userId: user.uid, // Add the user ID
       });
+      toast.success("Transaction added successfully!"); // Add success toast
+
     } catch (error) {
       console.error("Error adding document: ", error);
-      alert("Failed to add transaction.");
+      toast.error("Failed to add transaction."); // Replace alert
     } finally {
       setIsSubmitting(false);
     }
