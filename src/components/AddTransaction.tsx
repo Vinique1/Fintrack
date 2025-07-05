@@ -2,28 +2,24 @@
 
 import { useState } from 'react';
 import TransactionForm from './TransactionForm';
-import { db, auth } from '../services/firebase';
-import { collection, addDoc } from 'firebase/firestore';
-import { toast } from 'react-hot-toast'; // Import toast
+import { type Transaction } from './TransactionList';
 
-const AddTransaction = () => {
+type TransactionData = Omit<Transaction, 'id' | 'userId'>;
+
+interface AddTransactionProps {
+  onAdd: (data: TransactionData) => Promise<void>;
+}
+
+const AddTransaction = ({ onAdd }: AddTransactionProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleAddTransaction = async (data: any) => {
-    const user = auth.currentUser;
-    if (!user) return;
-
+  const handleAddTransaction = async (data: TransactionData) => {
     setIsSubmitting(true);
     try {
-      await addDoc(collection(db, 'transactions'), {
-        ...data,
-        userId: user.uid, // Add the user ID
-      });
-      toast.success("Transaction added successfully!"); // Add success toast
-
+      await onAdd(data);
     } catch (error) {
-      console.error("Error adding document: ", error);
-      toast.error("Failed to add transaction."); // Replace alert
+      // The parent component will show the toast, but we can still log here
+      console.error("Failed to add transaction from child", error);
     } finally {
       setIsSubmitting(false);
     }

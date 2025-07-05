@@ -48,6 +48,8 @@ firebase.json
 index.html
 migrate.cjs
 package.json
+public/ft.svg
+public/ftl.svg
 public/vite.svg
 README.md
 src/App.css
@@ -67,6 +69,7 @@ src/components/TransactionModal.tsx
 src/context/AuthContext.tsx
 src/index.css
 src/main.tsx
+src/pages/BudgetsPage.tsx
 src/pages/LoginPage.tsx
 src/pages/ProfilePage.tsx
 src/pages/ReportsPage.tsx
@@ -83,6 +86,167 @@ vite.config.ts
 <files>
 This section contains the contents of the repository's files.
 
+<file path="public/ft.svg">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" zoomAndPan="magnify" viewBox="0 0 375 374.999991" height="500" preserveAspectRatio="xMidYMid meet" version="1.2"><defs><clipPath id="81f917a009"><path d="M 18 32 L 365.863281 32 L 365.863281 318 L 18 318 Z M 18 32 "/></clipPath></defs><g id="7f4a88249f"><path style=" stroke:none;fill-rule:nonzero;fill:#a6a6a6;fill-opacity:1;" d="M 105.039062 213.0625 L 105.039062 345.113281 L 66.066406 322.632812 L 57.597656 317.761719 L 53.402344 315.285156 L 53.402344 213.0625 Z M 105.039062 213.0625 "/><path style=" stroke:none;fill-rule:nonzero;fill:#a6a6a6;fill-opacity:1;" d="M 132.316406 129.875 L 184.027344 129.875 L 184.027344 358.902344 L 132.316406 358.902344 Z M 132.316406 129.875 "/><path style=" stroke:none;fill-rule:nonzero;fill:#a6a6a6;fill-opacity:1;" d="M 262.945312 0 L 262.945312 314.386719 L 237.089844 329.75 L 211.234375 345.1875 L 211.234375 0 Z M 262.945312 0 "/><path style=" stroke:none;fill-rule:nonzero;fill:#000000;fill-opacity:1;" d="M 303.636719 115.710938 L 302.738281 115.1875 L 295.84375 111.214844 C 293.296875 114.8125 290.449219 118.636719 287.375 122.683594 L 292.996094 125.980469 L 292.996094 178.441406 C 298.09375 172.96875 302.8125 167.574219 307.160156 162.476562 L 307.160156 121.933594 C 307.160156 119.308594 305.8125 116.988281 303.636719 115.710938 Z M 298.691406 184.0625 C 296.820312 186.007812 294.945312 188.03125 292.996094 190.054688 L 292.996094 281.636719 L 270.363281 294.675781 L 262.945312 298.949219 L 211.234375 328.777344 L 203.8125 333.046875 L 184.027344 344.515625 L 159.222656 358.828125 L 158.25 359.429688 L 157.273438 358.828125 L 132.394531 344.441406 L 105.113281 328.703125 L 84.730469 317.011719 L 76.410156 312.214844 L 68.316406 307.566406 L 53.402344 298.949219 L 45.683594 294.453125 L 37.289062 289.582031 L 29.121094 284.859375 L 23.351562 281.5625 L 23.351562 125.90625 L 158.171875 48.113281 L 203.8125 74.492188 L 203.8125 58.082031 L 161.695312 33.800781 C 159.523438 32.527344 156.824219 32.527344 154.652344 33.800781 L 12.707031 115.710938 C 10.535156 116.988281 9.1875 119.308594 9.1875 121.859375 L 9.1875 285.683594 C 9.1875 288.230469 10.535156 290.554688 12.707031 291.828125 L 18.179688 294.976562 L 26.648438 299.921875 L 47.855469 312.140625 L 49.355469 312.964844 L 53.402344 315.285156 L 57.597656 317.683594 L 66.066406 322.554688 L 105.039062 345.113281 L 154.652344 373.742188 C 155.773438 374.34375 156.972656 374.71875 158.171875 374.71875 C 159.371094 374.71875 160.644531 374.417969 161.695312 373.742188 L 211.234375 345.1875 L 241.359375 327.800781 L 262.871094 315.363281 L 270.289062 311.089844 L 303.5625 291.90625 C 305.738281 290.628906 307.085938 288.308594 307.085938 285.757812 L 307.085938 174.691406 C 304.460938 177.765625 301.613281 180.914062 298.691406 184.0625 Z M 298.691406 184.0625 "/><g clip-rule="nonzero" clip-path="url(#81f917a009)"><path style=" stroke:none;fill-rule:nonzero;fill:#f11414;fill-opacity:1;" d="M 365.542969 115.710938 L 347.105469 105.820312 C 344.03125 110.839844 331.742188 133.25 307.160156 162.402344 C 302.8125 167.574219 298.09375 172.894531 292.996094 178.367188 C 284.152344 187.882812 274.1875 197.777344 262.945312 207.894531 C 248.03125 221.234375 230.867188 234.871094 211.234375 248.0625 C 202.613281 253.832031 193.546875 259.605469 183.953125 265.148438 C 168.066406 274.367188 150.902344 283.210938 132.242188 291.378906 C 123.472656 295.203125 114.40625 298.949219 104.964844 302.398438 C 95.746094 305.84375 86.152344 309.140625 76.261719 312.214844 C 70.113281 314.164062 63.894531 315.960938 57.523438 317.761719 L 53.328125 315.363281 L 49.28125 313.039062 L 47.78125 312.214844 L 26.574219 300 L 18.179688 294.976562 C 19.078125 294.753906 20.050781 294.527344 20.953125 294.226562 C 26.496094 292.730469 31.894531 291.230469 37.289062 289.65625 C 42.761719 288.007812 48.15625 286.359375 53.402344 284.558594 C 71.761719 278.488281 88.925781 271.746094 105.113281 264.476562 C 114.554688 260.203125 123.625 255.78125 132.394531 251.210938 C 151.277344 241.316406 168.441406 230.824219 184.105469 220.109375 C 193.769531 213.4375 202.839844 206.617188 211.382812 199.875 C 231.917969 183.460938 249.003906 166.972656 263.09375 151.683594 C 272.613281 141.269531 280.707031 131.527344 287.527344 122.683594 C 290.597656 118.636719 293.445312 114.8125 295.992188 111.214844 C 302.589844 101.996094 307.460938 94.277344 310.757812 88.882812 C 311.207031 88.207031 311.582031 87.535156 311.957031 86.859375 L 305.285156 83.261719 L 299.890625 80.414062 L 291.945312 76.140625 L 294.121094 74.792969 L 357.671875 35.375 L 362.84375 32.152344 L 363.144531 41.144531 Z M 365.542969 115.710938 "/></g></g></svg>
+</file>
+
+<file path="public/ftl.svg">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" zoomAndPan="magnify" viewBox="0 0 375 374.999991" height="500" preserveAspectRatio="xMidYMid meet" version="1.2"><defs><clipPath id="0a6f5420b5"><path d="M 266 14.660156 L 324 14.660156 L 324 106 L 266 106 Z M 266 14.660156 "/></clipPath><clipPath id="e8ddb6f34e"><path d="M 115 318 L 174 318 L 174 360.410156 L 115 360.410156 Z M 115 318 "/></clipPath></defs><g id="603df67b38"><rect x="0" width="375" y="0" height="374.999991" style="fill:#ffffff;fill-opacity:1;stroke:none;"/><rect x="0" width="375" y="0" height="374.999991" style="fill:#f4f6fc;fill-opacity:1;stroke:none;"/><path style=" stroke:none;fill-rule:evenodd;fill:#12229d;fill-opacity:1;" d="M 288.632812 121.796875 C 248.324219 186.554688 58.035156 355.660156 11.015625 247.871094 C 62.207031 382 261.566406 190.945312 308.949219 140.804688 L 323.386719 154.957031 L 325.382812 99.011719 L 274.953125 110.183594 L 288.667969 121.796875 Z M 328.03125 179.226562 C 275.605469 257.664062 54.367188 381.164062 0.566406 245.984375 C 58.46875 413.886719 291.75 263.652344 352.375 203.570312 L 369.644531 221.640625 L 374.363281 152.523438 L 311.523438 164.316406 Z M 328.03125 179.226562 "/><g clip-rule="nonzero" clip-path="url(#0a6f5420b5)"><path style=" stroke:none;fill-rule:evenodd;fill:#050a30;fill-opacity:1;" d="M 266.101562 105.289062 L 323.96875 92.480469 L 323.96875 14.660156 L 266.101562 14.660156 Z M 266.101562 105.289062 "/></g><path style=" stroke:none;fill-rule:evenodd;fill:#050a30;fill-opacity:1;" d="M 248.578125 120.816406 L 248.578125 55.003906 L 190.710938 55.003906 L 190.710938 213.875 C 209.832031 198.601562 228.152344 181.949219 245.132812 164.386719 C 246.292969 163.191406 247.453125 161.992188 248.578125 160.761719 Z M 248.578125 120.816406 "/><path style=" stroke:none;fill-rule:evenodd;fill:#050a30;fill-opacity:1;" d="M 173.152344 183.253906 L 173.152344 112 L 115.175781 112 L 115.175781 262.382812 C 136.617188 252.40625 157.367188 238.761719 173.152344 227.261719 Z M 173.152344 183.253906 "/><path style=" stroke:none;fill-rule:evenodd;fill:#050a30;fill-opacity:1;" d="M 248.6875 207.199219 C 233.957031 219.898438 218.753906 232.125 203.117188 243.589844 C 199.273438 246.417969 195.136719 249.394531 190.710938 252.441406 L 190.710938 275.261719 C 195.972656 272.902344 201.125 270.4375 206.167969 267.859375 C 220.714844 260.53125 235.007812 252.222656 248.6875 243.082031 Z M 248.6875 207.199219 "/><path style=" stroke:none;fill-rule:evenodd;fill:#050a30;fill-opacity:1;" d="M 266.101562 191.78125 L 266.101562 230.78125 C 269.546875 228.207031 272.921875 225.59375 276.261719 222.945312 C 291.28125 210.9375 307.496094 196.097656 319.214844 180.207031 L 298.28125 161.269531 C 288.886719 170.628906 279.234375 179.769531 269.511719 188.660156 C 268.386719 189.675781 267.261719 190.726562 266.101562 191.742188 Z M 266.101562 191.78125 "/><path style=" stroke:none;fill-rule:evenodd;fill:#050a30;fill-opacity:1;" d="M 173.152344 282.589844 L 173.152344 264.085938 C 155.519531 275.226562 135.457031 286.179688 115.175781 293.292969 L 115.175781 298.082031 C 116.699219 297.863281 118.222656 297.644531 119.710938 297.429688 C 137.707031 294.597656 155.773438 289.339844 173.152344 282.589844 Z M 173.152344 282.589844 "/><g clip-rule="nonzero" clip-path="url(#e8ddb6f34e)"><path style=" stroke:none;fill-rule:evenodd;fill:#050a30;fill-opacity:1;" d="M 173.152344 318.035156 C 154.320312 323.949219 134.585938 328.265625 115.175781 329.355469 L 115.175781 360.339844 L 173.152344 360.339844 Z M 173.152344 318.035156 "/></g><path style=" stroke:none;fill-rule:evenodd;fill:#050a30;fill-opacity:1;" d="M 190.710938 311.976562 L 190.710938 359.46875 L 248.6875 359.46875 L 248.6875 285.347656 C 240.089844 289.992188 231.382812 294.382812 222.601562 298.515625 C 212.660156 303.195312 201.921875 307.804688 190.675781 311.976562 Z M 190.710938 311.976562 "/><path style=" stroke:none;fill-rule:evenodd;fill:#050a30;fill-opacity:1;" d="M 266.101562 275.515625 L 266.101562 359.25 L 324.078125 359.25 L 324.078125 236.550781 C 316.894531 242.027344 309.601562 247.363281 302.164062 252.476562 C 290.480469 260.53125 278.4375 268.257812 266.101562 275.515625 Z M 266.101562 275.515625 "/><path style=" stroke:none;fill-rule:evenodd;fill:#050a30;fill-opacity:1;" d="M 267.625 139.246094 C 271.871094 134.058594 276.078125 128.6875 279.851562 123.101562 L 266.101562 111.457031 L 266.101562 141.058594 C 266.609375 140.441406 267.117188 139.863281 267.589844 139.246094 Z M 267.625 139.246094 "/><path style=" stroke:none;fill-rule:evenodd;fill:#050a30;fill-opacity:1;" d="M 309.09375 150.3125 C 306.046875 153.46875 302.960938 156.625 299.84375 159.746094 L 315.660156 156.769531 L 309.058594 150.3125 Z M 309.09375 150.3125 "/></g></svg>
+</file>
+
+<file path="src/pages/BudgetsPage.tsx">
+// src/pages/BudgetsPage.tsx
+
+import { useState, useEffect } from 'react';
+import { useAuth } from '../context/AuthContext';
+import { db } from '../services/firebase';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { Link } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
+
+const expenseCategories = [ 'Housing', 'Food', 'Transportation', 'Utilities', 'Church', 'Healthcare', 'Entertainment', 'Shopping', 'Education', 'Personal Care', 'Debt Payments', 'Savings', 'Gifts', 'Other Expenses' ];
+
+const BudgetsPage = () => {
+  const { currentUser } = useAuth();
+  const [budgets, setBudgets] = useState<Record<string, number>>({});
+  const [overallBudget, setOverallBudget] = useState(0);
+  const [enableRollover, setEnableRollover] = useState(false); // Add state for the setting
+  const [isLoading, setIsLoading] = useState(true);
+
+  const year = new Date().getFullYear();
+  const month = new Date().getMonth();
+  const budgetDocId = `budget-${currentUser?.uid}-${year}-${month}`;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!currentUser) return;
+      setIsLoading(true);
+      try {
+        const budgetDocRef = doc(db, 'budgets', budgetDocId);
+        const settingsDocRef = doc(db, 'userSettings', currentUser.uid);
+
+        const [budgetSnap, settingsSnap] = await Promise.all([getDoc(budgetDocRef), getDoc(settingsDocRef)]);
+
+        if (budgetSnap.exists()) {
+          setBudgets(budgetSnap.data().amounts || {});
+          setOverallBudget(budgetSnap.data().overallAmount || 0);
+        }
+        if (settingsSnap.exists()) {
+          setEnableRollover(settingsSnap.data().enableRollover || false);
+        }
+      } catch (error) {
+        toast.error("Could not load data.");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  }, [currentUser, budgetDocId]);
+
+  const handleBudgetChange = (category: string, amount: string) => {
+    setBudgets(prev => ({
+      ...prev,
+      [category]: Number(amount) || 0,
+    }));
+  };
+
+  const handleSave = async () => {
+    if (!currentUser) return;
+    setIsLoading(true);
+    try {
+      const budgetDocRef = doc(db, 'budgets', budgetDocId);
+      const settingsDocRef = doc(db, 'userSettings', currentUser.uid);
+
+      await Promise.all([
+        setDoc(budgetDocRef, { amounts: budgets, overallAmount: overallBudget, userId: currentUser.uid }),
+        setDoc(settingsDocRef, { enableRollover: enableRollover, userId: currentUser.uid }, { merge: true })
+      ]);
+      
+      toast.success("Settings and budgets saved!");
+    } catch (error) {
+      toast.error("Failed to save.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // When the page first loads, we want to show a loading indicator
+  if (isLoading) {
+    return (
+        <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+            <p>Loading budgets...</p>
+        </div>
+    );
+  }
+
+  return (
+    <div className="bg-gray-50 min-h-screen">
+      <div className="container mx-auto p-4 md:p-8">
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-3xl font-bold text-gray-800">Monthly Budgets</h1>
+          <Link to="/" className="font-medium text-indigo-600 hover:text-indigo-500">
+            &larr; Back to Dashboard
+          </Link>
+        </div>
+        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+          {/* Add Rollover Toggle */}
+          <div className="flex justify-between items-center border-b pb-4 mb-4">
+            <div>
+              <h3 className="text-lg font-medium">Enable Rollover Budgets</h3>
+              <p className="text-sm text-gray-500">Carry over unused budget amounts to the next month.</p>
+            </div>
+            <label className="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" checked={enableRollover} onChange={(e) => setEnableRollover(e.target.checked)} className="sr-only peer" />
+              <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
+            </label>
+          </div>
+          <div className="border-b pb-4 mb-4">
+            <h3 className="text-lg font-medium">Overall Monthly Budget</h3>
+            <div className="flex items-center gap-2 mt-2">
+              <span className="font-semibold">₦</span>
+              <input
+                type="number"
+                value={overallBudget || ''}
+                onChange={(e) => setOverallBudget(Number(e.target.value) || 0)}
+                placeholder="e.g., 150000"
+                className="border border-gray-300 rounded-md p-1 w-40"
+              />
+            </div>
+          </div>
+          <h3 className="text-lg font-medium">Category Budgets</h3>
+          <p className="text-gray-600 mb-4 text-sm">Set your spending limits for each category.</p>
+          <div className="space-y-4">
+            {expenseCategories.map(category => (
+              <div key={category} className="flex justify-between items-center">
+                <label htmlFor={`budget-${category}`} className="font-medium">{category}</label>
+                <div className="flex items-center gap-2">
+                  <span className="font-semibold">₦</span>
+                  <input
+                    type="number"
+                    id={`budget-${category}`}
+                    value={budgets[category] || ''}
+                    onChange={(e) => handleBudgetChange(category, e.target.value)}
+                    placeholder="0.00"
+                    className="border border-gray-300 rounded-md p-1 w-32 text-right"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-6 border-t pt-4 text-right">
+            <button onClick={handleSave} disabled={isLoading} className="bg-indigo-600 text-white py-2 px-6 rounded-md hover:bg-indigo-700 disabled:bg-indigo-400">
+              {isLoading ? 'Saving...' : 'Save Budgets'}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default BudgetsPage;
+</file>
+
 <file path=".firebase/hosting.ZGlzdA.cache">
 index.html,1751489289183,438a31145453151bba6a3ba551c83016cf51063f875d23bef255c18ba5bacd4b
 vite.svg,1751365810968,699a02e0e68a579f687d364bbbe7633161244f35af068220aee37b1b33dfb3c7
@@ -96,171 +260,6 @@ assets/index-DMVOLGdp.js,1751489289184,980415e2e9ef9eb4b74ea2adbf700a047caad56e6
     "default": "fintrack-app-f9321"
   }
 }
-</file>
-
-<file path="firebase.json">
-{
-  "hosting": {
-    "public": "dist",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
-  }
-}
-</file>
-
-<file path="src/components/EmptyState.tsx">
-// src/components/EmptyState.tsx
-
-import { type IconType } from 'react-icons';
-
-interface EmptyStateProps {
-  icon: IconType;
-  message: string;
-}
-
-const EmptyState = ({ icon: Icon, message }: EmptyStateProps) => {
-  return (
-    <div className="text-center py-10">
-      <Icon className="mx-auto text-5xl text-gray-300" />
-      <p className="mt-4 text-sm text-gray-500">{message}</p>
-    </div>
-  );
-};
-
-export default EmptyState;
-</file>
-
-<file path="src/components/PasswordStrengthMeter.tsx">
-// src/components/PasswordStrengthMeter.tsx
-
-interface PasswordStrengthMeterProps {
-  strength: number; // A score from 0 (worst) to 4 (best)
-}
-
-const PasswordStrengthMeter = ({ strength }: PasswordStrengthMeterProps) => {
-  const strengthLabels = ["Weak", "Fair", "Good", "Strong", "Very Strong"];
-  const color = ["bg-red-500", "bg-orange-500", "bg-yellow-500", "bg-lime-500", "bg-green-500"][strength];
-
-  return (
-    <div>
-      <div className="flex gap-2 mt-2">
-        {Array.from({ length: 5 }).map((_, index) => (
-          <div key={index} className="h-2 flex-1 rounded-full">
-            <div
-              className={`h-full rounded-full transition-all duration-300 ${index <= strength ? color : 'bg-gray-200'}`}
-            ></div>
-          </div>
-        ))}
-      </div>
-      <p className="text-right text-sm mt-1 font-medium" style={{ color: color?.replace('bg-', 'text-') }}>
-        {strengthLabels[strength]}
-      </p>
-    </div>
-  );
-};
-
-export default PasswordStrengthMeter;
-</file>
-
-<file path="src/pages/ReportsPage.tsx">
-// src/pages/ReportsPage.tsx
-
-import { useState, useEffect } from 'react';
-import { useAuth } from '../context/AuthContext';
-import { db } from '../services/firebase';
-import { collection, query, where, getDocs, orderBy } from 'firebase/firestore';
-import { type Transaction } from '../components/TransactionList';
-import { Link } from 'react-router-dom';
-
-const ReportsPage = () => {
-  const { currentUser } = useAuth();
-  // Set default dates for the last 30 days
-  const thirtyDaysAgo = new Date(new Date().setDate(new Date().getDate() - 30));
-  const [startDate, setStartDate] = useState(thirtyDaysAgo.toISOString().substring(0, 10));
-  const [endDate, setEndDate] = useState(new Date().toISOString().substring(0, 10));
-
-  const [reportData, setReportData] = useState<Transaction[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    const fetchReportData = async () => {
-      if (!currentUser) return;
-
-      setIsLoading(true);
-      try {
-        const q = query(
-          collection(db, 'transactions'),
-          where('userId', '==', currentUser.uid),
-          where('date', '>=', startDate),
-          where('date', '<=', endDate),
-          orderBy('date', 'desc')
-        );
-        
-        const querySnapshot = await getDocs(q);
-        const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Transaction));
-        setReportData(data);
-
-      } catch (error) {
-        console.error("Error fetching report data: ", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchReportData();
-  }, [currentUser, startDate, endDate]);
-
-  return (
-    <div className="bg-gray-50 min-h-screen">
-      <div className="container mx-auto p-4 md:p-8">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold text-gray-800">Reports</h1>
-          <Link to="/" className="font-medium text-indigo-600 hover:text-indigo-500">
-            &larr; Back to Dashboard
-          </Link>
-        </div>
-        
-        {/* Date Range Filter */}
-        <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex items-center gap-4 mb-8">
-          <div>
-            <label htmlFor="startDate" className="block text-sm font-medium text-gray-700">From</label>
-            <input type="date" id="startDate" value={startDate} onChange={e => setStartDate(e.target.value)} className="mt-1"/>
-          </div>
-          <div>
-            <label htmlFor="endDate" className="block text-sm font-medium text-gray-700">To</label>
-            <input type="date" id="endDate" value={endDate} onChange={e => setEndDate(e.target.value)} className="mt-1"/>
-          </div>
-        </div>
-
-        {/* Reports Content Area */}
-        {isLoading ? (
-          <p>Loading report...</p>
-        ) : (
-          <div className="space-y-8">
-            {/* We will add report widgets here */}
-            <div className="bg-white p-6 rounded-xl shadow-sm">
-              <h2 className="text-xl font-semibold">Report Summary</h2>
-              <p className="mt-2 text-gray-600">
-                Found <strong>{reportData.length}</strong> transactions for the selected period.
-              </p>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-};
-
-export default ReportsPage;
 </file>
 
 <file path=".gitignore">
@@ -322,14 +321,33 @@ export default tseslint.config([
 ])
 </file>
 
+<file path="firebase.json">
+{
+  "hosting": {
+    "public": "dist",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
+</file>
+
 <file path="index.html">
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/ft.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
+    <title>Fintrack</title>
   </head>
   <body>
     <div id="root"></div>
@@ -391,48 +409,6 @@ async function migrateData() {
 }
 
 migrateData();
-</file>
-
-<file path="package.json">
-{
-  "name": "fintrack-app",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "@zxcvbn-ts/core": "^3.0.4",
-    "chart.js": "^4.5.0",
-    "firebase": "^11.10.0",
-    "firebase-admin": "^13.4.0",
-    "react": "^19.1.0",
-    "react-chartjs-2": "^5.3.0",
-    "react-dom": "^19.1.0",
-    "react-hot-toast": "^2.5.2",
-    "react-icons": "^5.5.0",
-    "react-router-dom": "^7.6.3"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.29.0",
-    "@tailwindcss/vite": "^4.1.11",
-    "@types/react": "^19.1.8",
-    "@types/react-dom": "^19.1.6",
-    "@vitejs/plugin-react": "^4.5.2",
-    "eslint": "^9.29.0",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-react-refresh": "^0.4.20",
-    "globals": "^16.2.0",
-    "tailwindcss": "^4.1.11",
-    "typescript": "~5.8.3",
-    "typescript-eslint": "^8.34.1",
-    "vite": "^7.0.0"
-  }
-}
 </file>
 
 <file path="public/vite.svg">
@@ -561,33 +537,932 @@ export default tseslint.config([
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--logos" width="35.93" height="32" preserveAspectRatio="xMidYMid meet" viewBox="0 0 256 228"><path fill="#00D8FF" d="M210.483 73.824a171.49 171.49 0 0 0-8.24-2.597c.465-1.9.893-3.777 1.273-5.621c6.238-30.281 2.16-54.676-11.769-62.708c-13.355-7.7-35.196.329-57.254 19.526a171.23 171.23 0 0 0-6.375 5.848a155.866 155.866 0 0 0-4.241-3.917C100.759 3.829 77.587-4.822 63.673 3.233C50.33 10.957 46.379 33.89 51.995 62.588a170.974 170.974 0 0 0 1.892 8.48c-3.28.932-6.445 1.924-9.474 2.98C17.309 83.498 0 98.307 0 113.668c0 15.865 18.582 31.778 46.812 41.427a145.52 145.52 0 0 0 6.921 2.165a167.467 167.467 0 0 0-2.01 9.138c-5.354 28.2-1.173 50.591 12.134 58.266c13.744 7.926 36.812-.22 59.273-19.855a145.567 145.567 0 0 0 5.342-4.923a168.064 168.064 0 0 0 6.92 6.314c21.758 18.722 43.246 26.282 56.54 18.586c13.731-7.949 18.194-32.003 12.4-61.268a145.016 145.016 0 0 0-1.535-6.842c1.62-.48 3.21-.974 4.76-1.488c29.348-9.723 48.443-25.443 48.443-41.52c0-15.417-17.868-30.326-45.517-39.844Zm-6.365 70.984c-1.4.463-2.836.91-4.3 1.345c-3.24-10.257-7.612-21.163-12.963-32.432c5.106-11 9.31-21.767 12.459-31.957c2.619.758 5.16 1.557 7.61 2.4c23.69 8.156 38.14 20.213 38.14 29.504c0 9.896-15.606 22.743-40.946 31.14Zm-10.514 20.834c2.562 12.94 2.927 24.64 1.23 33.787c-1.524 8.219-4.59 13.698-8.382 15.893c-8.067 4.67-25.32-1.4-43.927-17.412a156.726 156.726 0 0 1-6.437-5.87c7.214-7.889 14.423-17.06 21.459-27.246c12.376-1.098 24.068-2.894 34.671-5.345a134.17 134.17 0 0 1 1.386 6.193ZM87.276 214.515c-7.882 2.783-14.16 2.863-17.955.675c-8.075-4.657-11.432-22.636-6.853-46.752a156.923 156.923 0 0 1 1.869-8.499c10.486 2.32 22.093 3.988 34.498 4.994c7.084 9.967 14.501 19.128 21.976 27.15a134.668 134.668 0 0 1-4.877 4.492c-9.933 8.682-19.886 14.842-28.658 17.94ZM50.35 144.747c-12.483-4.267-22.792-9.812-29.858-15.863c-6.35-5.437-9.555-10.836-9.555-15.216c0-9.322 13.897-21.212 37.076-29.293c2.813-.98 5.757-1.905 8.812-2.773c3.204 10.42 7.406 21.315 12.477 32.332c-5.137 11.18-9.399 22.249-12.634 32.792a134.718 134.718 0 0 1-6.318-1.979Zm12.378-84.26c-4.811-24.587-1.616-43.134 6.425-47.789c8.564-4.958 27.502 2.111 47.463 19.835a144.318 144.318 0 0 1 3.841 3.545c-7.438 7.987-14.787 17.08-21.808 26.988c-12.04 1.116-23.565 2.908-34.161 5.309a160.342 160.342 0 0 1-1.76-7.887Zm110.427 27.268a347.8 347.8 0 0 0-7.785-12.803c8.168 1.033 15.994 2.404 23.343 4.08c-2.206 7.072-4.956 14.465-8.193 22.045a381.151 381.151 0 0 0-7.365-13.322Zm-45.032-43.861c5.044 5.465 10.096 11.566 15.065 18.186a322.04 322.04 0 0 0-30.257-.006c4.974-6.559 10.069-12.652 15.192-18.18ZM82.802 87.83a323.167 323.167 0 0 0-7.227 13.238c-3.184-7.553-5.909-14.98-8.134-22.152c7.304-1.634 15.093-2.97 23.209-3.984a321.524 321.524 0 0 0-7.848 12.897Zm8.081 65.352c-8.385-.936-16.291-2.203-23.593-3.793c2.26-7.3 5.045-14.885 8.298-22.6a321.187 321.187 0 0 0 7.257 13.246c2.594 4.48 5.28 8.868 8.038 13.147Zm37.542 31.03c-5.184-5.592-10.354-11.779-15.403-18.433c4.902.192 9.899.29 14.978.29c5.218 0 10.376-.117 15.453-.343c-4.985 6.774-10.018 12.97-15.028 18.486Zm52.198-57.817c3.422 7.8 6.306 15.345 8.596 22.52c-7.422 1.694-15.436 3.058-23.88 4.071a382.417 382.417 0 0 0 7.859-13.026a347.403 347.403 0 0 0 7.425-13.565Zm-16.898 8.101a358.557 358.557 0 0 1-12.281 19.815a329.4 329.4 0 0 1-23.444.823c-7.967 0-15.716-.248-23.178-.732a310.202 310.202 0 0 1-12.513-19.846h.001a307.41 307.41 0 0 1-10.923-20.627a310.278 310.278 0 0 1 10.89-20.637l-.001.001a307.318 307.318 0 0 1 12.413-19.761c7.613-.576 15.42-.876 23.31-.876H128c7.926 0 15.743.303 23.354.883a329.357 329.357 0 0 1 12.335 19.695a358.489 358.489 0 0 1 11.036 20.54a329.472 329.472 0 0 1-11 20.722Zm22.56-122.124c8.572 4.944 11.906 24.881 6.52 51.026c-.344 1.668-.73 3.367-1.15 5.09c-10.622-2.452-22.155-4.275-34.23-5.408c-7.034-10.017-14.323-19.124-21.64-27.008a160.789 160.789 0 0 1 5.888-5.4c18.9-16.447 36.564-22.941 44.612-18.3ZM128 90.808c12.625 0 22.86 10.235 22.86 22.86s-10.235 22.86-22.86 22.86s-22.86-10.235-22.86-22.86s10.235-22.86 22.86-22.86Z"></path></svg>
 </file>
 
+<file path="src/components/Card.tsx">
+// src/components/Card.tsx
+
+import { type IconType } from 'react-icons';
+
+interface CardProps {
+  title: string;
+  amount: number;
+  icon: IconType;
+  color: string;
+}
+
+const Card = ({ title, amount, icon: Icon, color }: CardProps) => {
+  const amountColor = {
+    green: 'text-green-600',
+    red: 'text-red-600',
+    indigo: 'text-indigo-600',
+  }[color];
+
+  const bgColor = {
+    green: 'bg-green-100',
+    red: 'bg-red-100',
+    indigo: 'bg-indigo-100',
+  }[color];
+
+  return (
+    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+      <div className="flex items-center justify-between">
+        <div>
+          <p className="text-gray-500 text-sm font-medium">{title}</p>
+          <p className={`text-2xl font-bold ${amountColor} mt-1`}>
+            ₦{amount.toFixed(2)}
+          </p>
+        </div>
+        <div className={`w-12 h-12 ${bgColor} rounded-full flex items-center justify-center`}>
+          <Icon className={`${amountColor} text-xl`} />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Card;
+</file>
+
+<file path="src/components/EmptyState.tsx">
+// src/components/EmptyState.tsx
+
+import { type IconType } from 'react-icons';
+
+interface EmptyStateProps {
+  icon: IconType;
+  message: string;
+}
+
+const EmptyState = ({ icon: Icon, message }: EmptyStateProps) => {
+  return (
+    <div className="text-center py-10">
+      <Icon className="mx-auto text-5xl text-gray-300" />
+      <p className="mt-4 text-sm text-gray-500">{message}</p>
+    </div>
+  );
+};
+
+export default EmptyState;
+</file>
+
+<file path="src/components/Header.tsx">
+// src/components/Header.tsx
+
+import { FaPiggyBank, FaChartLine, FaUserCircle, FaWallet, FaChevronDown } from 'react-icons/fa'; // Add FaPiggyBank
+import { useAuth } from '../context/AuthContext'; // <-- Add this line
+import { signOut } from 'firebase/auth'; // <-- Add this line
+import { auth } from '../services/firebase'; // <-- Add this line
+import { Link } from 'react-router-dom'; // Import Link
+
+
+interface HeaderProps {
+  currentMonth: number;
+  currentYear: number;
+  onMonthChange: (month: number) => void;
+  onYearChange: (year: number) => void;
+}
+
+const Header = ({ currentMonth, currentYear, onMonthChange, onYearChange }: HeaderProps) => {
+  const { currentUser } = useAuth(); // Get the current user from our context
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      // The onAuthStateChanged listener will handle the redirect
+    } catch (error) {
+      console.error("Failed to log out", error);
+    }
+  };
+
+  const years = Array.from({ length: 11 }, (_, i) => new Date().getFullYear() - 5 + i);
+  const months = [
+    'January', 'February', 'March', 'April', 'May', 'June', 'July',
+    'August', 'September', 'October', 'November', 'December'
+  ];
+
+  return (
+    <header>
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+        <div className="flex items-center mb-4 md:mb-0">
+          <FaWallet className="text-3xl text-indigo-600 mr-3" />
+          <h1 className="text-3xl font-bold text-gray-800">FinTrack</h1>
+        </div>
+        <div className="flex items-center space-x-4">
+          {/* Month and Year selectors */}
+          <div className="relative">
+            <select
+              value={currentMonth}
+              onChange={(e) => onMonthChange(Number(e.target.value))}
+              className="appearance-none bg-white border border-gray-300 rounded-md py-2 pl-3 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            >
+              {months.map((month, index) => (
+                <option key={index} value={index}>{month}</option>
+              ))}
+            </select>
+            <FaChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+          </div>
+          <div className="relative">
+            <select
+              value={currentYear}
+              onChange={(e) => onYearChange(Number(e.target.value))}
+              className="appearance-none bg-white border border-gray-300 rounded-md py-2 pl-3 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            >
+              {years.map((year) => (
+                <option key={year} value={year}>{year}</option>
+              ))}
+            </select>
+            <FaChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+          </div>
+                    
+          {currentUser && (
+            <>
+              {/* Add this new link */}
+              <Link to="/budgets" title="Budgets" className="text-gray-600 hover:text-indigo-600">
+                <FaPiggyBank className="text-2xl" />
+              </Link>
+              <Link to="/reports" title="Reports" className="text-gray-600 hover:text-indigo-600">
+                <FaChartLine className="text-2xl" />
+              </Link>
+              <Link to="/profile" title="My Profile" className="text-gray-600 hover:text-indigo-600">
+                <FaUserCircle className="text-2xl" />
+              </Link>
+            <button 
+              onClick={handleLogout}
+              className="bg-red-500 text-white text-sm font-medium py-2 px-4 rounded-md hover:bg-red-600"
+            >
+              Logout
+            </button>
+          </>
+          )}
+        </div>
+      </div>
+      <p className="text-gray-600 mt-2">Track your monthly income and expenses effortlessly</p>
+    </header>
+  );
+};
+
+export default Header;
+</file>
+
+<file path="src/components/PasswordStrengthMeter.tsx">
+// src/components/PasswordStrengthMeter.tsx
+
+interface PasswordStrengthMeterProps {
+  strength: number; // A score from 0 (worst) to 4 (best)
+}
+
+const PasswordStrengthMeter = ({ strength }: PasswordStrengthMeterProps) => {
+  const strengthLabels = ["Weak", "Fair", "Good", "Strong", "Very Strong"];
+  const color = ["bg-red-500", "bg-orange-500", "bg-yellow-500", "bg-lime-500", "bg-green-500"][strength];
+
+  return (
+    <div>
+      <div className="flex gap-2 mt-2">
+        {Array.from({ length: 5 }).map((_, index) => (
+          <div key={index} className="h-2 flex-1 rounded-full">
+            <div
+              className={`h-full rounded-full transition-all duration-300 ${index <= strength ? color : 'bg-gray-200'}`}
+            ></div>
+          </div>
+        ))}
+      </div>
+      <p className="text-right text-sm mt-1 font-medium" style={{ color: color?.replace('bg-', 'text-') }}>
+        {strengthLabels[strength]}
+      </p>
+    </div>
+  );
+};
+
+export default PasswordStrengthMeter;
+</file>
+
+<file path="src/components/ProtectedRoute.tsx">
+// src/components/ProtectedRoute.tsx
+
+import { type ReactNode } from 'react';
+import { useAuth } from '../context/AuthContext';
+import { Navigate } from 'react-router-dom';
+
+interface ProtectedRouteProps {
+  children: ReactNode;
+}
+
+const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
+  const { currentUser, isLoading } = useAuth();
+
+  if (isLoading) {
+    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Loading...</div>;
+  }
+
+  if (!currentUser) {
+    // If there is no user, redirect to the login page
+    return <Navigate to="/login" />;
+  }
+
+  // If there is a user, render the child components (the dashboard)
+  return children;
+};
+
+export default ProtectedRoute;
+</file>
+
+<file path="src/components/SummaryCards.tsx">
+// src/components/SummaryCards.tsx
+
+import Card from './Card';
+import { FaArrowUp, FaArrowDown, FaBalanceScale } from 'react-icons/fa';
+
+interface SummaryCardsProps {
+  totalIncome: number;
+  totalExpenses: number;
+  balance: number;
+  overallBudget: number; // Add prop
+}
+
+const SummaryCards = ({ totalIncome, totalExpenses, balance, overallBudget }: SummaryCardsProps) => {
+  const expensePercentage = overallBudget > 0 ? (totalExpenses / overallBudget) * 100 : 0;
+  
+  const getProgressBarColor = (percentage: number) => {
+    if (percentage > 100) return 'bg-red-500';
+    if (percentage > 80) return 'bg-orange-500';
+    return 'bg-green-500';
+  };
+  
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <Card title="Total Income" amount={totalIncome} icon={FaArrowUp} color="green" />
+      
+      {/* Custom layout for Total Expenses card */}
+      <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="text-gray-500 text-sm font-medium">Total Expenses</p>
+            <p className="text-2xl font-bold text-red-600 mt-1">
+              ₦{totalExpenses.toFixed(2)}
+            </p>
+          </div>
+          <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
+            <FaArrowDown className="text-red-600 text-xl" />
+          </div>
+        </div>
+        {overallBudget > 0 && (
+          <div className="mt-4">
+            <p className="text-xs text-gray-500 text-right">
+              of ₦{overallBudget.toFixed(2)} budget
+            </p>
+            <div className="w-full bg-gray-200 rounded-full h-2 mt-1">
+              <div
+                className={`h-2 rounded-full ${getProgressBarColor(expensePercentage)}`}
+                style={{ width: `${Math.min(expensePercentage, 100)}%` }}
+              ></div>
+            </div>
+          </div>
+        )}
+      </div>
+      
+      <Card title="Balance" amount={balance} icon={FaBalanceScale} color="indigo" />
+    </div>
+  );
+};
+
+export default SummaryCards;
+</file>
+
+<file path="src/context/AuthContext.tsx">
+// src/context/AuthContext.tsx
+
+import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
+import { auth } from '../services/firebase';
+import { onAuthStateChanged, type User } from 'firebase/auth';
+
+interface AuthContextType {
+  currentUser: User | null;
+  isLoading: boolean;
+}
+
+const AuthContext = createContext<AuthContextType>({
+  currentUser: null,
+  isLoading: true,
+});
+
+export const useAuth = () => {
+  return useContext(AuthContext);
+};
+
+interface AuthProviderProps {
+  children: ReactNode;
+}
+
+export const AuthProvider = ({ children }: AuthProviderProps) => {
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // onAuthStateChanged is a listener that fires whenever the user logs in or out
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user);
+      setIsLoading(false);
+    });
+
+    // Cleanup the listener when the component unmounts
+    return unsubscribe;
+  }, []);
+
+  const value = {
+    currentUser,
+    isLoading,
+  };
+
+  return (
+    <AuthContext.Provider value={value}>
+      {!isLoading && children}
+    </AuthContext.Provider>
+  );
+};
+</file>
+
+<file path="src/index.css">
+@import "tailwindcss";
+</file>
+
+<file path="src/main.tsx">
+// src/main.tsx
+
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import './index.css';
+import App from './App.tsx';
+import LoginPage from './pages/LoginPage.tsx';
+import SignUpPage from './pages/SignUpPage.tsx';
+import { AuthProvider } from './context/AuthContext.tsx';
+import ProtectedRoute from './components/ProtectedRoute.tsx';
+import ProfilePage from './pages/ProfilePage.tsx';
+import ReportsPage from './pages/ReportsPage.tsx';
+import BudgetsPage from './pages/BudgetsPage.tsx';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: (
+      <ProtectedRoute>
+        <App />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/profile', // Add this new route
+    element: (
+      <ProtectedRoute>
+        <ProfilePage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/reports', // Add this new route
+    element: (
+      <ProtectedRoute>
+        <ReportsPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/budgets', // Add this route
+    element: (
+      <ProtectedRoute>
+        <BudgetsPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/login',
+    element: <LoginPage />,
+  },
+  {
+    path: '/signup',
+    element: <SignUpPage />,
+  },
+]);
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  </StrictMode>,
+);
+</file>
+
+<file path="src/pages/LoginPage.tsx">
+// src/pages/LoginPage.tsx
+
+import { useState, type FormEvent } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { auth } from '../services/firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+
+const LoginPage = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError('');
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      // On success, redirect to the main dashboard
+      navigate('/');
+    } catch (err: any) {
+      // Handle common Firebase errors for login
+      if (err.code === 'auth/invalid-credential') {
+        setError('Invalid email or password. Please try again.');
+      } else {
+        setError('Failed to log in. Please try again.');
+        console.error(err);
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="max-w-md w-full bg-white p-8 rounded-xl shadow-md">
+        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Log In to FinTrack</h2>
+        
+        {error && <p className="mb-4 text-center text-red-500 bg-red-100 p-3 rounded-md">{error}</p>}
+
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition disabled:bg-indigo-400"
+          >
+            {isLoading ? 'Logging In...' : 'Log In'}
+          </button>
+        </form>
+        <p className="mt-4 text-center text-sm text-gray-600">
+          Don't have an account?{' '}
+          <Link to="/signup" className="font-medium text-indigo-600 hover:text-indigo-500">
+            Sign Up
+          </Link>
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default LoginPage;
+</file>
+
+<file path="src/pages/ReportsPage.tsx">
+// src/pages/ReportsPage.tsx
+
+import { useState, useEffect, useMemo } from 'react';
+import { useAuth } from '../context/AuthContext';
+import { db } from '../services/firebase';
+import { collection, query, where, getDocs } from 'firebase/firestore';
+import { type Transaction } from '../components/TransactionList';
+import { Link } from 'react-router-dom';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, PointElement, LineElement } from 'chart.js';
+import { Pie, Line } from 'react-chartjs-2';
+import EmptyState from '../components/EmptyState';
+import { FaChartPie, FaChartLine, FaArrowUp, FaArrowDown, FaBalanceScale, FaFileCsv } from 'react-icons/fa';
+
+ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, PointElement, LineElement);
+
+const ReportsPage = () => {
+  const { currentUser } = useAuth();
+  const thirtyDaysAgo = new Date(new Date().setDate(new Date().getDate() - 30));
+  const [startDate, setStartDate] = useState(thirtyDaysAgo.toISOString().substring(0, 10));
+  const [endDate, setEndDate] = useState(new Date().toISOString().substring(0, 10));
+
+  const [reportData, setReportData] = useState<Transaction[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchReportData = async () => {
+      if (!currentUser || !startDate || !endDate) return;
+
+      setIsLoading(true);
+      try {
+        const q = query(
+          collection(db, 'transactions'),
+          where('userId', '==', currentUser.uid),
+          where('date', '>=', startDate),
+          where('date', '<=', endDate)
+        );
+        const querySnapshot = await getDocs(q);
+        const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Transaction));
+        data.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+        setReportData(data);
+      } catch (error) {
+        console.error("Error fetching report data: ", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchReportData();
+  }, [currentUser, startDate, endDate]);
+
+  const { pieChartData, categoryTotals } = useMemo(() => {
+    const expenseData = reportData.filter(t => t.type === 'expense');
+    const totals = expenseData.reduce((acc, transaction) => {
+      acc[transaction.category] = (acc[transaction.category] || 0) + transaction.amount;
+      return acc;
+    }, {} as Record<string, number>);
+    
+    return {
+      pieChartData: {
+        labels: Object.keys(totals),
+        datasets: [{
+          label: 'Expenses by Category',
+          data: Object.values(totals),
+          backgroundColor: ['#4f46e5', '#f97316', '#ef4444', '#eab308', '#22c55e', '#06b6d4', '#8b5cf6', '#d946ef'],
+          borderColor: '#ffffff',
+          borderWidth: 2,
+        }],
+      },
+      categoryTotals: totals,
+    };
+  }, [reportData]);
+
+  const lineChartData = useMemo(() => {
+    const dataByDate: { [key: string]: { income: number, expense: number } } = {};
+    const rangeInDays = (new Date(endDate).getTime() - new Date(startDate).getTime()) / (1000 * 3600 * 24);
+    const aggregateByMonth = rangeInDays > 45;
+
+    reportData.forEach(t => {
+      let key;
+      const transactionDate = new Date(t.date);
+      if (aggregateByMonth) {
+        key = transactionDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
+      } else {
+        key = transactionDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      }
+      
+      if (!dataByDate[key]) dataByDate[key] = { income: 0, expense: 0 };
+      dataByDate[key][t.type] += t.amount;
+    });
+    
+    const sortedLabels = Object.keys(dataByDate).sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
+    
+    return {
+      labels: sortedLabels,
+      datasets: [
+        { label: 'Income', data: sortedLabels.map(label => dataByDate[label].income), borderColor: '#10b981', backgroundColor: '#10b981', tension: 0.1 },
+        { label: 'Expense', data: sortedLabels.map(label => dataByDate[label].expense), borderColor: '#ef4444', backgroundColor: '#ef4444', tension: 0.1 },
+      ],
+    };
+  }, [reportData, startDate, endDate]);
+
+  const summaryData = useMemo(() => {
+    const income = reportData.filter(t => t.type === 'income').reduce((sum, t) => sum + t.amount, 0);
+    const expenses = reportData.filter(t => t.type === 'expense').reduce((sum, t) => sum + t.amount, 0);
+    const topExpenses = Object.entries(categoryTotals).sort(([, a], [, b]) => b - a).slice(0, 3);
+    return { income, expenses, net: income - expenses, topExpenses };
+  }, [reportData, categoryTotals]);
+
+  const handleExportCSV = () => {
+    if (reportData.length === 0) {
+      alert("No data to export.");
+      return;
+    }
+    const headers = ["ID", "Date", "Type", "Title", "Amount", "Category", "Description"];
+    const csvRows = [
+      headers.join(','),
+      ...reportData.map(t => [
+        t.id, t.date, t.type, `"${t.title.replace(/"/g, '""')}"`,
+        t.amount, t.category, `"${t.description?.replace(/"/g, '""') || ''}"`
+      ].join(','))
+    ];
+    const csvString = csvRows.join('\n');
+    const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.href = url;
+    link.setAttribute('download', `fintrack-report-${startDate}-to-${endDate}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  return (
+    <div className="bg-gray-50 min-h-screen">
+      <div className="container mx-auto p-4 md:p-8">
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-3xl font-bold text-gray-800">Reports</h1>
+          <Link to="/" className="font-medium text-indigo-600 hover:text-indigo-500">&larr; Back to Dashboard</Link>
+        </div>
+        
+        <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex flex-wrap items-center justify-between gap-4 mb-8">
+          <div className="flex items-center gap-4">
+            <div>
+              <label htmlFor="startDate" className="block text-sm font-medium text-gray-700">From</label>
+              <input type="date" id="startDate" value={startDate} onChange={e => setStartDate(e.target.value)} className="mt-1 border border-gray-300 rounded-md shadow-sm p-1"/>
+            </div>
+            <div>
+              <label htmlFor="endDate" className="block text-sm font-medium text-gray-700">To</label>
+              <input type="date" id="endDate" value={endDate} onChange={e => setEndDate(e.target.value)} className="mt-1 border border-gray-300 rounded-md shadow-sm p-1"/>
+            </div>
+          </div>
+          <button onClick={handleExportCSV} className="flex items-center gap-2 bg-green-600 text-white text-sm font-medium py-2 px-4 rounded-md hover:bg-green-700">
+            <FaFileCsv />
+            Export to CSV
+          </button>
+        </div>
+
+        {isLoading ? (
+          <p className="text-center">Loading reports...</p>
+        ) : (
+          <div className="space-y-8">
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+              <h2 className="text-xl font-semibold mb-4">Income vs. Expense Trend</h2>
+              {reportData.length > 0 ? (
+                <div className="h-80 w-full">
+                  <Line data={lineChartData} options={{ maintainAspectRatio: false }} />
+                </div>
+              ) : (
+                <EmptyState icon={FaChartLine} message="No transaction data for this period." />
+              )}
+            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                <h2 className="text-xl font-semibold mb-4">Expenses by Category</h2>
+                {pieChartData.labels.length > 0 ? (
+                  <div className="h-80 w-full flex items-center justify-center">
+                    <Pie data={pieChartData} options={{ maintainAspectRatio: false, plugins: { legend: { position: 'right' }}}} />
+                  </div>
+                ) : (
+                  <EmptyState icon={FaChartPie} message="No expense data for this period." />
+                )}
+              </div>
+              <div className="space-y-8">
+                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                  <h2 className="text-xl font-semibold mb-4">Cash Flow</h2>
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center"><div className="flex items-center gap-2 text-green-600"><FaArrowUp /><span>Total Income</span></div><span className="font-bold">₦{summaryData.income.toFixed(2)}</span></div>
+                    <div className="flex justify-between items-center"><div className="flex items-center gap-2 text-red-600"><FaArrowDown /><span>Total Expenses</span></div><span className="font-bold">₦{summaryData.expenses.toFixed(2)}</span></div>
+                    <div className="flex justify-between items-center border-t pt-3 mt-3"><div className="flex items-center gap-2 text-indigo-600"><FaBalanceScale /><span>Net Flow</span></div><span className="font-bold text-lg">₦{summaryData.net.toFixed(2)}</span></div>
+                  </div>
+                </div>
+                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                  <h2 className="text-xl font-semibold mb-4">Top Spending Categories</h2>
+                  <div className="space-y-2">
+                    {summaryData.topExpenses.length > 0 ? summaryData.topExpenses.map(([category, amount]) => (
+                      <div key={category} className="flex justify-between text-sm">
+                        <span>{category}</span>
+                        <span className="font-medium">₦{amount.toFixed(2)}</span>
+                      </div>
+                    )) : <p className="text-sm text-gray-500">No expense data.</p>}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default ReportsPage;
+</file>
+
+<file path="src/services/firebase.ts">
+// src/services/firebase.ts
+
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { getAuth } from "firebase/auth"; // <-- Add this import
+
+
+// The variable names we expect in the .env.local file
+const requiredEnvVars = [
+  'VITE_API_KEY',
+  'VITE_AUTH_DOMAIN',
+  'VITE_PROJECT_ID',
+  'VITE_STORAGE_BUCKET',
+  'VITE_MESSAGING_SENDER_ID',
+  'VITE_APP_ID',
+];
+
+// Your debugging check
+for (const varName of requiredEnvVars) {
+  if (!import.meta.env[varName]) {
+    throw new Error(`Configuration Error: Missing required environment variable ${varName}`);
+  }
+}
+
+// Your web app's Firebase configuration, now validated
+const firebaseConfig = {
+  apiKey: import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_APP_ID
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+// Initialize Cloud Firestore and get a reference to the service
+export const db = getFirestore(app);
+export const auth = getAuth(app); // <-- Add this line to export the auth service
+</file>
+
+<file path="src/vite-env.d.ts">
+/// <reference types="vite/client" />
+</file>
+
+<file path="tailwind.config.js">
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+</file>
+
+<file path="tsconfig.app.json">
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true
+  },
+  "include": ["src"]
+}
+</file>
+
+<file path="tsconfig.json">
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
+}
+</file>
+
+<file path="tsconfig.node.json">
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
+    "target": "ES2023",
+    "lib": ["ES2023"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true
+  },
+  "include": ["vite.config.ts"]
+}
+</file>
+
+<file path="vite.config.ts">
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite' // <-- Import the plugin
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [
+    react(),
+    tailwindcss(), // <-- Add the plugin
+  ],
+})
+</file>
+
+<file path="package.json">
+{
+  "name": "fintrack-app",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@zxcvbn-ts/core": "^3.0.4",
+    "chart.js": "^4.5.0",
+    "firebase": "^11.10.0",
+    "firebase-admin": "^13.4.0",
+    "react": "^19.1.0",
+    "react-chartjs-2": "^5.3.0",
+    "react-dom": "^19.1.0",
+    "react-hot-toast": "^2.5.2",
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^7.6.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.29.0",
+    "@tailwindcss/vite": "^4.1.11",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-react": "^4.5.2",
+    "eslint": "^9.29.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.2.0",
+    "tailwindcss": "^4.1.11",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "^8.34.1",
+    "vite": "^7.0.0"
+  }
+}
+</file>
+
 <file path="src/components/AddTransaction.tsx">
 // src/components/AddTransaction.tsx
 
 import { useState } from 'react';
 import TransactionForm from './TransactionForm';
-import { db, auth } from '../services/firebase';
-import { collection, addDoc } from 'firebase/firestore';
-import { toast } from 'react-hot-toast'; // Import toast
+import { type Transaction } from './TransactionList';
 
-const AddTransaction = () => {
+type TransactionData = Omit<Transaction, 'id' | 'userId'>;
+
+interface AddTransactionProps {
+  onAdd: (data: TransactionData) => Promise<void>;
+}
+
+const AddTransaction = ({ onAdd }: AddTransactionProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleAddTransaction = async (data: any) => {
-    const user = auth.currentUser;
-    if (!user) return;
-
+  const handleAddTransaction = async (data: TransactionData) => {
     setIsSubmitting(true);
     try {
-      await addDoc(collection(db, 'transactions'), {
-        ...data,
-        userId: user.uid, // Add the user ID
-      });
-      toast.success("Transaction added successfully!"); // Add success toast
-
+      await onAdd(data);
     } catch (error) {
-      console.error("Error adding document: ", error);
-      toast.error("Failed to add transaction."); // Replace alert
+      // The parent component will show the toast, but we can still log here
+      console.error("Failed to add transaction from child", error);
     } finally {
       setIsSubmitting(false);
     }
@@ -623,9 +1498,10 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 interface AnalyticsProps {
   transactions: Transaction[];
+  budgets: Record<string, number>; // Add budgets to props
 }
 
-const Analytics = ({ transactions }: AnalyticsProps) => {
+const Analytics = ({ transactions, budgets }: AnalyticsProps) => {
   // Memoize expense category calculations
   const expenseCategoriesData = useMemo(() => {
     const expenseTransactions = transactions.filter(t => t.type === 'expense');
@@ -714,6 +1590,12 @@ const Analytics = ({ transactions }: AnalyticsProps) => {
     },
   };
 
+  const getProgressBarColor = (percentage: number) => {
+    if (percentage > 100) return 'bg-red-500';
+    if (percentage > 80) return 'bg-orange-500';
+    return 'bg-indigo-500';
+  };
+
   return (
     <>
       <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
@@ -725,32 +1607,34 @@ const Analytics = ({ transactions }: AnalyticsProps) => {
 
       <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
         <h2 className="text-xl font-semibold text-gray-800 mb-4">Expense Categories</h2>
-        <div className="space-y-3">
+        <div className="space-y-4">
           {expenseCategoriesData.categories.length > 0 ? (
-            expenseCategoriesData.categories.map(cat => {
-              const percentage = (cat.amount / expenseCategoriesData.total) * 100;
+            expenseCategoriesData.categories.map(({ category, amount }) => {
+              const budgetAmount = budgets[category];
+              const percentage = budgetAmount ? (amount / budgetAmount) * 100 : 0;
+
               return (
-                <div key={cat.category} className="space-y-1">
-                  <div className="flex justify-between text-sm">
-                    <span className="font-medium">{cat.category}</span>
+                <div key={category}>
+                  <div className="flex justify-between text-sm mb-1">
+                    <span className="font-medium">{category}</span>
                     <span className="text-gray-500">
-                      ₦{cat.amount.toFixed(2)} ({percentage.toFixed(1)}%)
+                      <strong>₦{amount.toFixed(2)}</strong>
+                      {budgetAmount && ` / ₦${budgetAmount.toFixed(2)}`}
                     </span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div
-                      className="bg-red-600 h-2 rounded-full"
-                      style={{ width: `${percentage}%` }}
-                    ></div>
-                  </div>
+                  {budgetAmount && (
+                    <div className="w-full bg-gray-200 rounded-full h-2">
+                      <div
+                        className={`h-2 rounded-full ${getProgressBarColor(percentage)}`}
+                        style={{ width: `${Math.min(percentage, 100)}%` }}
+                      ></div>
+                    </div>
+                  )}
                 </div>
               );
             })
           ) : (
-            <EmptyState 
-              icon={FaChartPie} 
-              message="No expense data available." 
-            />
+            <EmptyState icon={FaChartPie} message="No expense data available" />
           )}
         </div>
       </div>
@@ -759,198 +1643,6 @@ const Analytics = ({ transactions }: AnalyticsProps) => {
 };
 
 export default Analytics;
-</file>
-
-<file path="src/components/Card.tsx">
-// src/components/Card.tsx
-
-import { type IconType } from 'react-icons';
-
-interface CardProps {
-  title: string;
-  amount: number;
-  icon: IconType;
-  color: string;
-}
-
-const Card = ({ title, amount, icon: Icon, color }: CardProps) => {
-  const amountColor = {
-    green: 'text-green-600',
-    red: 'text-red-600',
-    indigo: 'text-indigo-600',
-  }[color];
-
-  const bgColor = {
-    green: 'bg-green-100',
-    red: 'bg-red-100',
-    indigo: 'bg-indigo-100',
-  }[color];
-
-  return (
-    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-      <div className="flex items-center justify-between">
-        <div>
-          <p className="text-gray-500 text-sm font-medium">{title}</p>
-          <p className={`text-2xl font-bold ${amountColor} mt-1`}>
-            ₦{amount.toFixed(2)}
-          </p>
-        </div>
-        <div className={`w-12 h-12 ${bgColor} rounded-full flex items-center justify-center`}>
-          <Icon className={`${amountColor} text-xl`} />
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default Card;
-</file>
-
-<file path="src/components/Header.tsx">
-// src/components/Header.tsx
-
-import { FaWallet, FaChevronDown, FaUserCircle } from 'react-icons/fa';
-import { useAuth } from '../context/AuthContext'; // <-- Add this line
-import { signOut } from 'firebase/auth'; // <-- Add this line
-import { auth } from '../services/firebase'; // <-- Add this line
-import { Link } from 'react-router-dom'; // Import Link
-
-
-interface HeaderProps {
-  currentMonth: number;
-  currentYear: number;
-  onMonthChange: (month: number) => void;
-  onYearChange: (year: number) => void;
-}
-
-const Header = ({ currentMonth, currentYear, onMonthChange, onYearChange }: HeaderProps) => {
-  const { currentUser } = useAuth(); // Get the current user from our context
-
-  const handleLogout = async () => {
-    try {
-      await signOut(auth);
-      // The onAuthStateChanged listener will handle the redirect
-    } catch (error) {
-      console.error("Failed to log out", error);
-    }
-  };
-
-  const years = Array.from({ length: 11 }, (_, i) => new Date().getFullYear() - 5 + i);
-  const months = [
-    'January', 'February', 'March', 'April', 'May', 'June', 'July',
-    'August', 'September', 'October', 'November', 'December'
-  ];
-
-  return (
-    <header>
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-        <div className="flex items-center mb-4 md:mb-0">
-          <FaWallet className="text-3xl text-indigo-600 mr-3" />
-          <h1 className="text-3xl font-bold text-gray-800">FinTrack</h1>
-        </div>
-        <div className="flex items-center space-x-4">
-          {/* Month and Year selectors */}
-          <div className="relative">
-            <select
-              value={currentMonth}
-              onChange={(e) => onMonthChange(Number(e.target.value))}
-              className="appearance-none bg-white border border-gray-300 rounded-md py-2 pl-3 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            >
-              {months.map((month, index) => (
-                <option key={index} value={index}>{month}</option>
-              ))}
-            </select>
-            <FaChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
-          </div>
-          <div className="relative">
-            <select
-              value={currentYear}
-              onChange={(e) => onYearChange(Number(e.target.value))}
-              className="appearance-none bg-white border border-gray-300 rounded-md py-2 pl-3 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            >
-              {years.map((year) => (
-                <option key={year} value={year}>{year}</option>
-              ))}
-            </select>
-            <FaChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
-          </div>
-                    
-          {currentUser && (
-            <>
-              <Link to="/profile" title="My Profile" className="text-gray-600 hover:text-indigo-600">
-                <FaUserCircle className="text-2xl" />
-              </Link>
-            <button 
-              onClick={handleLogout}
-              className="bg-red-500 text-white text-sm font-medium py-2 px-4 rounded-md hover:bg-red-600"
-            >
-              Logout
-            </button>
-          </>
-          )}
-        </div>
-      </div>
-      <p className="text-gray-600 mt-2">Track your monthly income and expenses effortlessly</p>
-    </header>
-  );
-};
-
-export default Header;
-</file>
-
-<file path="src/components/ProtectedRoute.tsx">
-// src/components/ProtectedRoute.tsx
-
-import { type ReactNode } from 'react';
-import { useAuth } from '../context/AuthContext';
-import { Navigate } from 'react-router-dom';
-
-interface ProtectedRouteProps {
-  children: ReactNode;
-}
-
-const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
-  const { currentUser, isLoading } = useAuth();
-
-  if (isLoading) {
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Loading...</div>;
-  }
-
-  if (!currentUser) {
-    // If there is no user, redirect to the login page
-    return <Navigate to="/login" />;
-  }
-
-  // If there is a user, render the child components (the dashboard)
-  return children;
-};
-
-export default ProtectedRoute;
-</file>
-
-<file path="src/components/SummaryCards.tsx">
-// src/components/SummaryCards.tsx
-
-import Card from './Card';
-import { FaArrowUp, FaArrowDown, FaBalanceScale } from 'react-icons/fa';
-
-interface SummaryCardsProps {
-  totalIncome: number;
-  totalExpenses: number;
-  balance: number;
-}
-
-const SummaryCards = ({ totalIncome, totalExpenses, balance }: SummaryCardsProps) => {
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <Card title="Total Income" amount={totalIncome} icon={FaArrowUp} color="green" />
-      <Card title="Total Expenses" amount={totalExpenses} icon={FaArrowDown} color="red" />
-      <Card title="Balance" amount={balance} icon={FaBalanceScale} color="indigo" />
-    </div>
-  );
-};
-
-export default SummaryCards;
 </file>
 
 <file path="src/components/TransactionModal.tsx">
@@ -1061,202 +1753,6 @@ const TransactionModal = ({ transaction, onClose, onDelete, onUpdate, isSubmitti
 };
 
 export default TransactionModal;
-</file>
-
-<file path="src/context/AuthContext.tsx">
-// src/context/AuthContext.tsx
-
-import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
-import { auth } from '../services/firebase';
-import { onAuthStateChanged, type User } from 'firebase/auth';
-
-interface AuthContextType {
-  currentUser: User | null;
-  isLoading: boolean;
-}
-
-const AuthContext = createContext<AuthContextType>({
-  currentUser: null,
-  isLoading: true,
-});
-
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
-
-interface AuthProviderProps {
-  children: ReactNode;
-}
-
-export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    // onAuthStateChanged is a listener that fires whenever the user logs in or out
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user);
-      setIsLoading(false);
-    });
-
-    // Cleanup the listener when the component unmounts
-    return unsubscribe;
-  }, []);
-
-  const value = {
-    currentUser,
-    isLoading,
-  };
-
-  return (
-    <AuthContext.Provider value={value}>
-      {!isLoading && children}
-    </AuthContext.Provider>
-  );
-};
-</file>
-
-<file path="src/index.css">
-@import "tailwindcss";
-</file>
-
-<file path="src/main.tsx">
-// src/main.tsx
-
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import './index.css';
-import App from './App.tsx';
-import LoginPage from './pages/LoginPage.tsx';
-import SignUpPage from './pages/SignUpPage.tsx';
-import { AuthProvider } from './context/AuthContext.tsx';
-import ProtectedRoute from './components/ProtectedRoute.tsx';
-import ProfilePage from './pages/ProfilePage.tsx'; // Import the new page
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: (
-      <ProtectedRoute>
-        <App />
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: '/profile', // Add this new route
-    element: (
-      <ProtectedRoute>
-        <ProfilePage />
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: '/login',
-    element: <LoginPage />,
-  },
-  {
-    path: '/signup',
-    element: <SignUpPage />,
-  },
-]);
-
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
-  </StrictMode>,
-);
-</file>
-
-<file path="src/pages/LoginPage.tsx">
-// src/pages/LoginPage.tsx
-
-import { useState, type FormEvent } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { auth } from '../services/firebase';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-
-const LoginPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-  const navigate = useNavigate();
-
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError('');
-
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      // On success, redirect to the main dashboard
-      navigate('/');
-    } catch (err: any) {
-      // Handle common Firebase errors for login
-      if (err.code === 'auth/invalid-credential') {
-        setError('Invalid email or password. Please try again.');
-      } else {
-        setError('Failed to log in. Please try again.');
-        console.error(err);
-      }
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-      <div className="max-w-md w-full bg-white p-8 rounded-xl shadow-md">
-        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Log In to FinTrack</h2>
-        
-        {error && <p className="mb-4 text-center text-red-500 bg-red-100 p-3 rounded-md">{error}</p>}
-
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email Address</label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-              required
-            />
-          </div>
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition disabled:bg-indigo-400"
-          >
-            {isLoading ? 'Logging In...' : 'Log In'}
-          </button>
-        </form>
-        <p className="mt-4 text-center text-sm text-gray-600">
-          Don't have an account?{' '}
-          <Link to="/signup" className="font-medium text-indigo-600 hover:text-indigo-500">
-            Sign Up
-          </Link>
-        </p>
-      </div>
-    </div>
-  );
-};
-
-export default LoginPage;
 </file>
 
 <file path="src/pages/ProfilePage.tsx">
@@ -1512,149 +2008,6 @@ const SignUpPage = () => {
 export default SignUpPage;
 </file>
 
-<file path="src/services/firebase.ts">
-// src/services/firebase.ts
-
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { getAuth } from "firebase/auth"; // <-- Add this import
-
-
-// The variable names we expect in the .env.local file
-const requiredEnvVars = [
-  'VITE_API_KEY',
-  'VITE_AUTH_DOMAIN',
-  'VITE_PROJECT_ID',
-  'VITE_STORAGE_BUCKET',
-  'VITE_MESSAGING_SENDER_ID',
-  'VITE_APP_ID',
-];
-
-// Your debugging check
-for (const varName of requiredEnvVars) {
-  if (!import.meta.env[varName]) {
-    throw new Error(`Configuration Error: Missing required environment variable ${varName}`);
-  }
-}
-
-// Your web app's Firebase configuration, now validated
-const firebaseConfig = {
-  apiKey: import.meta.env.VITE_API_KEY,
-  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_APP_ID
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-
-// Initialize Cloud Firestore and get a reference to the service
-export const db = getFirestore(app);
-export const auth = getAuth(app); // <-- Add this line to export the auth service
-</file>
-
-<file path="src/vite-env.d.ts">
-/// <reference types="vite/client" />
-</file>
-
-<file path="tailwind.config.js">
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-}
-</file>
-
-<file path="tsconfig.app.json">
-{
-  "compilerOptions": {
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
-    "target": "ES2022",
-    "useDefineForClassFields": true,
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "skipLibCheck": true,
-
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "verbatimModuleSyntax": true,
-    "moduleDetection": "force",
-    "noEmit": true,
-    "jsx": "react-jsx",
-
-    /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "erasableSyntaxOnly": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
-  },
-  "include": ["src"]
-}
-</file>
-
-<file path="tsconfig.json">
-{
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
-}
-</file>
-
-<file path="tsconfig.node.json">
-{
-  "compilerOptions": {
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
-    "target": "ES2023",
-    "lib": ["ES2023"],
-    "module": "ESNext",
-    "skipLibCheck": true,
-
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "verbatimModuleSyntax": true,
-    "moduleDetection": "force",
-    "noEmit": true,
-
-    /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "erasableSyntaxOnly": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
-  },
-  "include": ["vite.config.ts"]
-}
-</file>
-
-<file path="vite.config.ts">
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite' // <-- Import the plugin
-
-// https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [
-    react(),
-    tailwindcss(), // <-- Add the plugin
-  ],
-})
-</file>
-
 <file path="src/App.tsx">
 // src/App.tsx
 
@@ -1668,7 +2021,7 @@ import Analytics from './components/Analytics';
 import TransactionModal from './components/TransactionModal';
 import { useAuth } from './context/AuthContext';
 import { db } from './services/firebase';
-import { collection, query, onSnapshot, orderBy, where, doc, deleteDoc, updateDoc } from 'firebase/firestore';
+import { collection, query, onSnapshot, orderBy, where, doc, deleteDoc, updateDoc, addDoc, getDoc, getDocs } from 'firebase/firestore';
 
 function App() {
   const { currentUser } = useAuth();
@@ -1681,29 +2034,110 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [sortOrder, setSortOrder] = useState('date-desc');
   const pendingDeleteRef = useRef<{ transaction: Transaction, timeoutId: NodeJS.Timeout } | null>(null);
+  const [budgets, setBudgets] = useState<Record<string, number>>({});
+  const [overallBudget, setOverallBudget] = useState(0);
+  const [settings, setSettings] = useState<{ enableRollover?: boolean }>({});
+  const [rolloverAmounts, setRolloverAmounts] = useState<Record<string, number>>({});
 
+  // Corrected useEffect to fetch both transactions and settings
   useEffect(() => {
     if (!currentUser) {
       setTransactions([]);
+      setSettings({});
       setIsLoading(false);
       return;
     }
+
     setIsLoading(true);
-    const q = query(
-      collection(db, 'transactions'),
-      where('userId', '==', currentUser.uid),
-      orderBy('date', 'desc')
-    );
-    const unsubscribe = onSnapshot(q, (snapshot) => {
+    // Listener for transactions
+    const transQuery = query(collection(db, 'transactions'), where('userId', '==', currentUser.uid), orderBy('date', 'desc'));
+    const unsubscribeTransactions = onSnapshot(transQuery, (snapshot) => {
       const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Transaction));
       setTransactions(data);
       setIsLoading(false);
-    }, (error) => {
-      console.error("Snapshot error: ", error);
-      setIsLoading(false);
+    });
+
+    // Listener for user settings
+    const settingsDocRef = doc(db, 'userSettings', currentUser.uid);
+    const unsubscribeSettings = onSnapshot(settingsDocRef, (doc) => {
+      setSettings(doc.data() || {});
+    });
+
+    return () => {
+      unsubscribeTransactions();
+      unsubscribeSettings();
+    };
+  }, [currentUser]);
+
+  // useEffect to fetch budgets for the CURRENT month
+  useEffect(() => {
+    if (!currentUser) return;
+    const budgetDocId = `budget-${currentUser.uid}-${currentYear}-${currentMonth}`;
+    const docRef = doc(db, 'budgets', budgetDocId);
+    const unsubscribe = onSnapshot(docRef, (docSnap) => {
+      if (docSnap.exists()) {
+        setBudgets(docSnap.data().amounts || {});
+        setOverallBudget(docSnap.data().overallAmount || 0);
+      } else {
+        setBudgets({});
+        setOverallBudget(0);
+      }
     });
     return () => unsubscribe();
-  }, [currentUser]);
+  }, [currentUser, currentMonth, currentYear]);
+
+  // useEffect to calculate rollover from PREVIOUS month
+  useEffect(() => {
+    const calculateRollover = async () => {
+      if (!currentUser || !settings.enableRollover) {
+        setRolloverAmounts({});
+        return;
+      }
+      const prevMonthDate = new Date(currentYear, currentMonth, 1);
+      prevMonthDate.setMonth(prevMonthDate.getMonth() - 1);
+      const prevMonth = prevMonthDate.getMonth();
+      const prevYear = prevMonthDate.getFullYear();
+
+      const budgetDocId = `budget-${currentUser.uid}-${prevYear}-${prevMonth}`;
+      const budgetDoc = await getDoc(doc(db, 'budgets', budgetDocId));
+      const prevBudgets = budgetDoc.data()?.amounts || {};
+
+      const q = query(
+        collection(db, 'transactions'),
+        where('userId', '==', currentUser.uid),
+        where('date', '>=', `${prevYear}-${String(prevMonth + 1).padStart(2, '0')}-01`),
+        where('date', '<=', `${prevYear}-${String(prevMonth + 1).padStart(2, '0')}-31`)
+      );
+      const transactionSnap = await getDocs(q);
+      const prevTransactions = transactionSnap.docs.map(d => d.data() as Transaction);
+      
+      const prevExpenses = prevTransactions.filter(t => t.type === 'expense').reduce((acc: Record<string, number>, t: Transaction) => {
+        acc[t.category] = (acc[t.category] || 0) + t.amount;
+        return acc;
+      }, {});
+
+      const rollovers: Record<string, number> = {};
+      for (const category in prevBudgets) {
+        const budget = prevBudgets[category];
+        const spent = prevExpenses[category] || 0;
+        if (budget > spent) {
+          rollovers[category] = budget - spent;
+        }
+      }
+      setRolloverAmounts(rollovers);
+    };
+    calculateRollover();
+  }, [currentUser, currentMonth, currentYear, settings.enableRollover]);
+
+  const effectiveBudgets = useMemo(() => {
+    const combined = { ...budgets };
+    if (settings.enableRollover) {
+      for (const category in rolloverAmounts) {
+        combined[category] = (combined[category] || 0) + rolloverAmounts[category];
+      }
+    }
+    return combined;
+  }, [budgets, rolloverAmounts, settings.enableRollover]);
 
   const filteredTransactions = useMemo(() => {
     let filtered = transactions.filter(t => {
@@ -1725,11 +2159,60 @@ function App() {
     return filtered;
   }, [transactions, currentMonth, currentYear, searchTerm, sortOrder]);
 
+  const expensesByCategory = useMemo(() => {
+    return filteredTransactions
+      .filter(t => t.type === 'expense')
+      .reduce((acc, t) => {
+        acc[t.category] = (acc[t.category] || 0) + t.amount;
+        return acc;
+      }, {} as Record<string, number>);
+  }, [filteredTransactions]);
+
   const { totalIncome, totalExpenses, balance } = useMemo(() => {
     const income = filteredTransactions.filter(t => t.type === 'income').reduce((sum, t) => sum + t.amount, 0);
     const expenses = filteredTransactions.filter(t => t.type === 'expense').reduce((sum, t) => sum + t.amount, 0);
     return { totalIncome: income, totalExpenses: expenses, balance: income - expenses };
   }, [filteredTransactions]);
+
+  const handleAddTransaction = async (data: Omit<Transaction, 'id' | 'userId'>) => {
+    if (!currentUser) return;
+
+    try {
+      // We are deliberately not awaiting this so the UI feels instant.
+      // The form will reset, and toasts will show up.
+      addDoc(collection(db, 'transactions'), { ...data, userId: currentUser.uid });
+
+      toast.success("Transaction added successfully!");
+
+      // --- Budget Alert Logic ---
+      if (data.type === 'expense') {
+        const newTotalExpenses = totalExpenses + data.amount;
+        // Check Overall Budget
+        if (overallBudget > 0 && newTotalExpenses > overallBudget) {
+          toast.error("You have exceeded your overall monthly budget!");
+        } else if (overallBudget > 0 && (newTotalExpenses / overallBudget) >= 0.9) {
+          // Use toast() with a custom icon instead of toast.warn()
+          toast("Warning: You are over 90% of your overall budget.", { icon: '⚠️' });
+        }
+
+        // Check Category Budget
+        const categoryBudget = budgets[data.category];
+        // Note: expensesByCategory is from a useMemo, it won't update until the next render.
+        // For instant feedback, we calculate the new total here.
+        const newTotalForCategory = (expensesByCategory[data.category] || 0) + data.amount;
+        if (categoryBudget > 0 && newTotalForCategory > categoryBudget) {
+          toast.error(`You have exceeded your budget for ${data.category}!`);
+        } else if (categoryBudget > 0 && (newTotalForCategory / categoryBudget) >= 0.9) {
+          // Use toast() with a custom icon instead of toast.warn()
+          toast(`Warning: You've spent over 90% of your ${data.category} budget.`, { icon: '⚠️' });
+        }
+      }
+    } catch (error) {
+      toast.error("Failed to add transaction.");
+      console.error("Error adding document: ", error);
+      throw error;
+    }
+  };
 
   const handleUpdate = async (transactionId: string, data: Omit<Transaction, 'id' | 'userId'>) => {
     if (!currentUser) return;
@@ -1806,10 +2289,11 @@ function App() {
             totalIncome={totalIncome}
             totalExpenses={totalExpenses}
             balance={balance}
+            overallBudget={overallBudget} // Pass the prop down
           />
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
             <div className="lg:col-span-2 space-y-6">
-              <AddTransaction />
+              <AddTransaction onAdd={handleAddTransaction} />
               <TransactionList
                 transactions={filteredTransactions}
                 isLoading={isLoading}
@@ -1821,7 +2305,8 @@ function App() {
               />
             </div>
             <div className="space-y-6">
-              <Analytics transactions={filteredTransactions} />
+              {/* Pass the new budgets prop to Analytics */}
+              <Analytics transactions={filteredTransactions} budgets={effectiveBudgets} />
             </div>
           </div>
         </main>

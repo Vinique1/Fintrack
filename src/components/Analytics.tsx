@@ -12,9 +12,10 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 interface AnalyticsProps {
   transactions: Transaction[];
+  budgets: Record<string, number>; // Add budgets to props
 }
 
-const Analytics = ({ transactions }: AnalyticsProps) => {
+const Analytics = ({ transactions, budgets }: AnalyticsProps) => {
   // Memoize expense category calculations
   const expenseCategoriesData = useMemo(() => {
     const expenseTransactions = transactions.filter(t => t.type === 'expense');
@@ -103,6 +104,12 @@ const Analytics = ({ transactions }: AnalyticsProps) => {
     },
   };
 
+  const getProgressBarColor = (percentage: number) => {
+    if (percentage > 100) return 'bg-red-500';
+    if (percentage > 80) return 'bg-orange-500';
+    return 'bg-indigo-500';
+  };
+
   return (
     <>
       <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
@@ -114,32 +121,34 @@ const Analytics = ({ transactions }: AnalyticsProps) => {
 
       <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
         <h2 className="text-xl font-semibold text-gray-800 mb-4">Expense Categories</h2>
-        <div className="space-y-3">
+        <div className="space-y-4">
           {expenseCategoriesData.categories.length > 0 ? (
-            expenseCategoriesData.categories.map(cat => {
-              const percentage = (cat.amount / expenseCategoriesData.total) * 100;
+            expenseCategoriesData.categories.map(({ category, amount }) => {
+              const budgetAmount = budgets[category];
+              const percentage = budgetAmount ? (amount / budgetAmount) * 100 : 0;
+
               return (
-                <div key={cat.category} className="space-y-1">
-                  <div className="flex justify-between text-sm">
-                    <span className="font-medium">{cat.category}</span>
+                <div key={category}>
+                  <div className="flex justify-between text-sm mb-1">
+                    <span className="font-medium">{category}</span>
                     <span className="text-gray-500">
-                      ₦{cat.amount.toFixed(2)} ({percentage.toFixed(1)}%)
+                      <strong>₦{amount.toFixed(2)}</strong>
+                      {budgetAmount && ` / ₦${budgetAmount.toFixed(2)}`}
                     </span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div
-                      className="bg-red-600 h-2 rounded-full"
-                      style={{ width: `${percentage}%` }}
-                    ></div>
-                  </div>
+                  {budgetAmount && (
+                    <div className="w-full bg-gray-200 rounded-full h-2">
+                      <div
+                        className={`h-2 rounded-full ${getProgressBarColor(percentage)}`}
+                        style={{ width: `${Math.min(percentage, 100)}%` }}
+                      ></div>
+                    </div>
+                  )}
                 </div>
               );
             })
           ) : (
-            <EmptyState 
-              icon={FaChartPie} 
-              message="No expense data available." 
-            />
+            <EmptyState icon={FaChartPie} message="No expense data available" />
           )}
         </div>
       </div>

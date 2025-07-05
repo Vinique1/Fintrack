@@ -1,6 +1,6 @@
 // src/components/Header.tsx
 
-import { FaWallet, FaChevronDown, FaUserCircle } from 'react-icons/fa';
+import { FaPiggyBank, FaChartLine, FaUserCircle, FaWallet, FaChevronDown } from 'react-icons/fa'; // Add FaPiggyBank
 import { useAuth } from '../context/AuthContext'; // <-- Add this line
 import { signOut } from 'firebase/auth'; // <-- Add this line
 import { auth } from '../services/firebase'; // <-- Add this line
@@ -68,6 +68,13 @@ const Header = ({ currentMonth, currentYear, onMonthChange, onYearChange }: Head
                     
           {currentUser && (
             <>
+              {/* Add this new link */}
+              <Link to="/budgets" title="Budgets" className="text-gray-600 hover:text-indigo-600">
+                <FaPiggyBank className="text-2xl" />
+              </Link>
+              <Link to="/reports" title="Reports" className="text-gray-600 hover:text-indigo-600">
+                <FaChartLine className="text-2xl" />
+              </Link>
               <Link to="/profile" title="My Profile" className="text-gray-600 hover:text-indigo-600">
                 <FaUserCircle className="text-2xl" />
               </Link>

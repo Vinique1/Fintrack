@@ -9,7 +9,9 @@ import LoginPage from './pages/LoginPage.tsx';
 import SignUpPage from './pages/SignUpPage.tsx';
 import { AuthProvider } from './context/AuthContext.tsx';
 import ProtectedRoute from './components/ProtectedRoute.tsx';
-import ProfilePage from './pages/ProfilePage.tsx'; // Import the new page
+import ProfilePage from './pages/ProfilePage.tsx';
+import ReportsPage from './pages/ReportsPage.tsx';
+import BudgetsPage from './pages/BudgetsPage.tsx';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +27,22 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <ProfilePage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/reports', // Add this new route
+    element: (
+      <ProtectedRoute>
+        <ReportsPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/budgets', // Add this route
+    element: (
+      <ProtectedRoute>
+        <BudgetsPage />
       </ProtectedRoute>
     ),
   },
